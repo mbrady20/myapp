@@ -1,10 +1,19 @@
-import { type AppType } from "next/app";
-import { api } from "npm/utils/api";
-import "npm/styles/globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+// pages/_app.js
+import { ChakraProvider } from '@chakra-ui/react'
+import Home from '.';
+import RootLayout from './layout';
+import { ClerkProvider } from '@clerk/nextjs';
 
-const MyApp: AppType = ({ Component, pageProps }) => {
-  return <ClerkProvider><Component {...pageProps} /></ClerkProvider>;
-};
+function MyApp({ Component, pageProps }) {
+  return (
+    <ClerkProvider>
+    <ChakraProvider>
+      <RootLayout>
+        <Component {...pageProps} />
+      </RootLayout>
+    </ChakraProvider>
+    </ClerkProvider>
+  )
+}
 
-export default api.withTRPC(MyApp);
+export default MyApp;
