@@ -1,11 +1,8 @@
 "use client";
 
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import Link from "next/link";
+
 
 import {
-  Button,
   Container,
   Text,
   Image,
@@ -14,13 +11,11 @@ import {
   Card,
   CardHeader,
   Heading,
-  Wrap,
   SimpleGrid,
   CardBody,
   Stack,
   StackDivider,
   Box,
-  Spacer,
 } from "@chakra-ui/react";
 
 export default function AboutPage() {
@@ -64,7 +59,7 @@ export default function AboutPage() {
                 </Box>
                 
                 <Box>
-                  <Image src="wisco2.png" htmlWidth={"275px"}/>
+                  <Image src="wisco2.png" htmlWidth={"275px"} alt="wisconsin"/>
                 </Box>
               </Flex>
             </CardHeader>
@@ -90,6 +85,7 @@ export default function AboutPage() {
                       src="rvcc.png"
                       borderRadius={"45%"}
                       htmlWidth={"150px"}
+                      alt="RVCC"
                     />
                   </Center>
                 </Box>
@@ -111,7 +107,7 @@ export default function AboutPage() {
                   <Heading>Washington and Lee University</Heading>
                 </Box>
                 <Box>
-                  <Image src="WAndL.png" htmlWidth={"150px"} />
+                  <Image src="WAndL.png" htmlWidth={"150px"} alt="Washington and Lee"/>
                 </Box>
               </Flex>
               <CardBody>
@@ -131,7 +127,7 @@ export default function AboutPage() {
                 </Box>
 
                 <Box>
-                  <Image src="lville.jpeg" borderRadius={"50%"} />
+                  <Image src="lville.jpeg" borderRadius={"50%"} alt="Lawrenceville" />
                 </Box>
               </Flex>
             </CardHeader>

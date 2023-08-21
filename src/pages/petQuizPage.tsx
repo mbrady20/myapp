@@ -8,14 +8,11 @@ import {
   Button,
   Center,
   Container,
-  Grid,
   GridItem,
-  Image,
   SimpleGrid,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import React, { useRef } from "react";
 import { useState } from "react";
 
@@ -73,25 +70,25 @@ export default function PetQuiz() {
         <SimpleGrid columns={2} spacing={10}>
           <GridItem rowSpan={1}>
             <button onClick={() => sydneyClick()}>
-              <img src="sydney.png" width={150}></img>
+              <img src="sydney.png" width={150} alt = "Sydney"></img>
             </button>
             <Text>{sydText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => lokClick()}>
-              <img src="loki.png" width={150}></img>
+              <img src="loki.png" width={150} alt = "Loki"></img>
             </button>
             <Text>{lokText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => stuClick()}>
-              <img src="stuart.png" width={150}></img>
+              <img src="stuart.png" width={150} alt = "Stuart"></img>
             </button>
             <Text>{stuText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => elClick()}>
-              <img src="gato.png" width={150}></img>
+              <img src="gato.png" width={150} alt = "El Gato"></img>
             </button>
             <Text>{elText}</Text>
           </GridItem>

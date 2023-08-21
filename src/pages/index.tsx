@@ -11,17 +11,10 @@ import {
   Image,
   Box,
   Flex,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
   Center,
-  Divider,
   Spacer,
 } from "@chakra-ui/react";
 
-import { Component } from "react";
 import { useRouter } from "next/router";
 
 export default function Home() {
@@ -32,7 +25,7 @@ export default function Home() {
       <Container>
         <Container paddingY="50px">
           <Center>
-            <Image src="me.png" width={120} height={120} borderRadius={"50%"}/>
+            <Image src="me.png" width={120} height={120} borderRadius={"50%"} alt="Michael Brady"/>
           </Center>
           <Center paddingY="10px">
             <Text fontSize="50px" as="b" textAlign="center">
