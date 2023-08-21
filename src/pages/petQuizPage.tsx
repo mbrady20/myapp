@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef } from "react";
 import { useState } from "react";
+import Image from "next/image"
 
 export default function PetQuiz() {
   const [sydCount, setSydCount] = useState(Number);
@@ -70,25 +71,25 @@ export default function PetQuiz() {
         <SimpleGrid columns={2} spacing={10}>
           <GridItem rowSpan={1}>
             <button onClick={() => sydneyClick()}>
-              <img src="sydney.png" width={150} alt = "Sydney"></img>
+              <Image src="sydney.png" width={150} alt = "Sydney"></Image>
             </button>
             <Text>{sydText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => lokClick()}>
-              <img src="loki.png" width={150} alt = "Loki"></img>
+              <Image src="loki.png" width={150} alt = "Loki"></Image>
             </button>
             <Text>{lokText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => stuClick()}>
-              <img src="stuart.png" width={150} alt = "Stuart"></img>
+              <Image src="stuart.png" width={150} alt = "Stuart"></Image>
             </button>
             <Text>{stuText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => elClick()}>
-              <img src="gato.png" width={150} alt = "El Gato"></img>
+              <Image src="gato.png" width={150} alt = "El Gato"></Image>
             </button>
             <Text>{elText}</Text>
           </GridItem>
