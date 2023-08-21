@@ -6,13 +6,13 @@ import type { AppProps } from 'next/app';
 
 function MyApp({Component, pageProps}: AppProps) {
   return (
-    <ClerkProvider>
+  //  <ClerkProvider>
     <ChakraProvider>
       <RootLayout>
         <Component {...pageProps} />
       </RootLayout>
     </ChakraProvider>
-    </ClerkProvider>
+//    </ClerkProvider>
   )
 }
 

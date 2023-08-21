@@ -71,25 +71,25 @@ export default function PetQuiz() {
         <SimpleGrid columns={2} spacing={10}>
           <GridItem rowSpan={1}>
             <button onClick={() => sydneyClick()}>
-              <Image src="sydney.png" width={150} alt = "Sydney"></Image>
+              <Image src="/sydney.png" width={150} height={80} alt = "Sydney"></Image>
             </button>
             <Text>{sydText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => lokClick()}>
-              <Image src="loki.png" width={150} alt = "Loki"></Image>
+              <Image src="/loki.png" width={150} height={80} alt = "Loki"></Image>
             </button>
             <Text>{lokText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => stuClick()}>
-              <Image src="stuart.png" width={150} alt = "Stuart"></Image>
+              <Image src="/stuart.png" width={150} height={80} alt = "Stuart"></Image>
             </button>
             <Text>{stuText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => elClick()}>
-              <Image src="gato.png" width={150} alt = "El Gato"></Image>
+              <Image src="/gato.png" width={150} height={80} alt = "El Gato"></Image>
             </button>
             <Text>{elText}</Text>
           </GridItem>
@@ -108,11 +108,11 @@ export default function PetQuiz() {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Please make sure you\'ve given each pet a different ranking
+              Please make sure you've given each pet a different ranking
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure? You can\'t undo this action afterwards.
+              Are you sure? You can't undo this action afterwards.
             </AlertDialogBody>
 
             <AlertDialogFooter>
