@@ -3,8 +3,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 import Home from '.';
 import RootLayout from './layout';
 import { ClerkProvider } from '@clerk/nextjs';
+import { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({Component, pageProps}: AppProps) {
   return (
     <ClerkProvider>
     <ChakraProvider>
