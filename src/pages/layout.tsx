@@ -1,3 +1,4 @@
+"use client";
 import { Box, Flex, Text, Center, Button, Container, IconButton } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {AiFillGithub, AiFillInstagram, AiFillLinkedin, AiFillMail, AiFillTwitterCircle} from "react-icons/ai"
