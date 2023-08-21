@@ -1,7 +1,6 @@
 "use client";
-import { Box, Flex, Text, Center, Button, Container, IconButton, IconButtonProps } from "@chakra-ui/react";
+import { Box, Flex, Text, Center, Button, Container, IconButton } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
 import {AiFillGithub, AiFillInstagram, AiFillLinkedin, AiFillMail, AiFillTwitterCircle} from "react-icons/ai"
 
 export default function RootLayout({
@@ -10,11 +9,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const GitButton = React.forwardRef<IconButtonProps, 'div'>((props, ref) => (
-    <IconButton  boxSize={8} borderRadius="50px" ref={ref} onClick={async () => await router.push("https://github.com/mbrady20/")} {...props}/>
-
-  ))
   return (
+
     
 <div>
           <Flex bg="blue.50" justifyItems={"center"}>
@@ -84,8 +80,8 @@ export default function RootLayout({
          <Center>
               <Flex justifyItems="center" paddingTop={"25px"}>
                 <Box p ='4'>
-                  <GitButton aria-label="git hub" as={AiFillGithub} />
-                                </Box>
+              <IconButton aria-label="git hub" as={AiFillGithub} boxSize={8} borderRadius="50px" onClick={async () => await router.push("https://github.com/mbrady20/")}/>
+              </Box>
               
              <Box p ='4'><IconButton aria-label="git hub" as={AiFillTwitterCircle} boxSize={8} borderRadius="50px" onClick={ async () =>  await router.push("https://twitter.com/MichaelJBrady9")}/></Box>
               <Box p ='4'><IconButton aria-label="git hub" as={AiFillMail} boxSize={8} borderRadius="50px" onClick={ async () => await router.push("mailto:bradymichael362@gmail.com")}/></Box>
