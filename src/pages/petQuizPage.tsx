@@ -1,5 +1,5 @@
 import {
-    AlertDialog,
+  AlertDialog,
   AlertDialogBody,
   AlertDialogContent,
   AlertDialogFooter,
@@ -16,7 +16,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 
 export default function PetQuiz() {
@@ -28,49 +28,44 @@ export default function PetQuiz() {
   const [lokText, setLokiText] = useState(4);
   const [stuText, setStuText] = useState(4);
   const [elText, setElText] = useState(4);
-  
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef()
-  function submitButton(){
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef<HTMLButtonElement>(null);
+  function submitButton() {
     console.log(sydText);
-    if(sydText == lokText || sydText == stuText || sydText == elText || lokText == stuText || lokText == elText || stuText == elText)
-        onOpen();
-    
+    if (
+      sydText == lokText ||
+      sydText == stuText ||
+      sydText == elText ||
+      lokText == stuText ||
+      lokText == elText ||
+      stuText == elText
+    )
+      onOpen();
   }
 
   function sydneyClick() {
-    setSydCount((sydCount + 1));
+    setSydCount(sydCount + 1);
 
-
-    setSydneyText(((sydCount) % 4) + 1);
-
+    setSydneyText((sydCount % 4) + 1);
   }
 
   function lokClick() {
-    setLokCount((lokCount + 1));
+    setLokCount(lokCount + 1);
 
-
-    setLokiText(((lokCount) % 4) + 1);
-
+    setLokiText((lokCount % 4) + 1);
   }
 
   function stuClick() {
-    setStuCount((stuCount + 1));
+    setStuCount(stuCount + 1);
 
-
-    setStuText(((stuCount) % 4) + 1);
-
-
+    setStuText((stuCount % 4) + 1);
   }
 
   function elClick() {
-    setElCount((elCount + 1));
+    setElCount(elCount + 1);
 
-
-    setElText(((elCount) % 4) + 1);
-
-
+    setElText((elCount % 4) + 1);
   }
   return (
     <Container>
@@ -108,13 +103,13 @@ export default function PetQuiz() {
         </SimpleGrid>
       </Center>
       <AlertDialog
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Please make sure you've given each pet a different ranking
             </AlertDialogHeader>
 
