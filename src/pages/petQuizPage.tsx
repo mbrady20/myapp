@@ -108,11 +108,11 @@ export default function PetQuiz() {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Please make sure you've given each pet a different ranking
+              Please make sure you\'ve given each pet a different ranking
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure? You can't undo this action afterwards.
+              Are you sure? You can\'t undo this action afterwards.
             </AlertDialogBody>
 
             <AlertDialogFooter>
