@@ -53,7 +53,7 @@ export default function PetQuiz() {
   }
 
   function submitPost(){
-    
+    setSubmitReady(false);
   }
   function sydneyClick() {
     setSydCount(sydCount + 1);
