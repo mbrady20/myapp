@@ -8,12 +8,13 @@ import {
   Button,
   Center,
   Container,
+  Flex,
   GridItem,
   SimpleGrid,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Image from "next/image"
 
@@ -26,6 +27,8 @@ export default function PetQuiz() {
   const [lokText, setLokiText] = useState(4);
   const [stuText, setStuText] = useState(4);
   const [elText, setElText] = useState(4);
+  const [submitReady, setSubmitReady] = useState(false);
+  const [alertText, setAlertText] = useState<string[]>(["","",""]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<HTMLButtonElement>(null);
@@ -39,9 +42,19 @@ export default function PetQuiz() {
       lokText == elText ||
       stuText == elText
     )
+    setSubmitReady(false);
+    else
+      setSubmitReady(true);
       onOpen();
   }
 
+  useEffect(() => {
+    if(submitReady)
+      setAlertText(["Do you want to submit this ranking?", `Sydney: ${sydText}\nLoki: ${lokText}\nStuart: ${stuText}\nEl Gato: ${elText}`]);
+    
+    else
+      setAlertText(["Please make sure you\'ve given each pet a different ranking",""]);
+  });
   function sydneyClick() {
     setSydCount(sydCount + 1);
 
@@ -66,32 +79,32 @@ export default function PetQuiz() {
     setElText((elCount % 4) + 1);
   }
   return (
-    <Container>
+    <Container minWidth={"90vw"}>
       <Center>
         <SimpleGrid columns={2} spacing={10}>
           <GridItem rowSpan={1}>
             <button onClick={() => sydneyClick()}>
               <Image src="/sydney.png" width={150} height={80} alt = "Sydney"></Image>
             </button>
-            <Text>{sydText}</Text>
+            <Text>Sydney: {sydText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => lokClick()}>
               <Image src="/loki.png" width={150} height={80} alt = "Loki"></Image>
             </button>
-            <Text>{lokText}</Text>
+            <Text>Loki: {lokText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => stuClick()}>
               <Image src="/stuart.png" width={150} height={80} alt = "Stuart"></Image>
             </button>
-            <Text>{stuText}</Text>
+            <Text>Stuart: {stuText}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => elClick()}>
               <Image src="/gato.png" width={150} height={80} alt = "El Gato"></Image>
             </button>
-            <Text>{elText}</Text>
+            <Text>El Gato {elText}</Text>
           </GridItem>
           <GridItem colSpan={2}>
             <Center>
@@ -108,17 +121,22 @@ export default function PetQuiz() {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            <Text>  Please make sure you&apos;ve given each pet a different ranking</Text>
+            <Text>{alertText[0]}</Text>
             </AlertDialogHeader>
 
             <AlertDialogBody>
-             <Text> Are you sure? You can&apos;t undo this action afterwards.</Text>
+             <Text>{alertText[1]}</Text>
             </AlertDialogBody>
 
             <AlertDialogFooter>
+              <SimpleGrid columns={2} spacing={5}>
               <Button ref={cancelRef} onClick={onClose}>
                 Change my answer!
               </Button>
+              <Button colorScheme="telegram" isDisabled={!submitReady}>
+                Submit!
+              </Button>
+              </SimpleGrid>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialogOverlay>

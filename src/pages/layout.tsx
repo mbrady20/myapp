@@ -10,9 +10,7 @@ export default function RootLayout({
 }) {
   const router = useRouter();
   return (
-
-    
-<div>
+<Container bg="blue.50" minHeight={"100vh"} minWidth={"100vw"}>
           <Flex bg="blue.50" justifyItems={"center"}>
           <Box paddingY="25px" paddingX="40px">
             <Text whiteSpace={"nowrap"} as="b">
@@ -24,21 +22,21 @@ export default function RootLayout({
               <Button
                 borderLeftRadius="50px"
                 bg="gray.200"
-                onClick={async () => await router.push("/")}
+                onClick={() => router.push("/")}
               >
                 Home
               </Button>
               <Button
                 bg="gray.200"
                 borderRadius="0"
-                onClick={async () => await router.push("/aboutPage")}
+                onClick={ () =>  router.push("/aboutPage")}
               >
                 About
               </Button>
-              <Button bg="gray.200" borderRadius="0" onClick={async () => await router.push("/petQuizPage")}>
+              <Button bg="gray.200" borderRadius="0" onClick={() => router.push("/petQuizPage")}>
                 Pet Quiz
               </Button>
-              <Button borderRightRadius="50px" bg="gray.200">
+              <Button borderRightRadius="50px" bg="gray.200" onClick={() => router.push("/morePage")}>
                 More
               </Button>
             </Center>
@@ -51,28 +49,27 @@ export default function RootLayout({
             </Button>
           </Box>
         </Flex>
-        <Flex bg="blue.50">
-        
+        <Flex bg="blue.50" >
               {children}
            
             </Flex>
         <Flex bg="blue.50" paddingY="25px" justifyItems={"center"}>
           <Container>
             <Center>
-              <Button bg="transparent" borderRadius={"0"} onClick={async () => await router.push("/")}>
+              <Button bg="transparent" borderRadius={"0"} onClick={() => router.push("/")}>
                 Home
               </Button>
               <Button
                 bg="transparent"
                 borderRadius="0"
-                onClick={async () => await router.push("/aboutPage")}
+                onClick={ () => router.push("/aboutPage")}
               >
                 About
               </Button>
-              <Button bg="transparent" borderRadius="0" onClick={async () => await router.push("/petQuizPage")}>
+              <Button bg="transparent" borderRadius="0" onClick={ () => router.push("/petQuizPage")}>
                 Pet Quiz
               </Button>
-              <Button borderRadius={"0"} bg="transparent">
+              <Button borderRadius={"0"} bg="transparent" onClick={() => router.push("/morePage")}>
                 More
               </Button>
             </Center>
@@ -80,13 +77,13 @@ export default function RootLayout({
          <Center>
               <Flex justifyItems="center" paddingTop={"25px"}>
                 <Box p ='4'>
-              <IconButton aria-label="git hub" as={AiFillGithub} boxSize={8} borderRadius="50px" onClick={async () => await router.push("https://github.com/mbrady20/")}/>
+              <IconButton aria-label="git hub" as={AiFillGithub} boxSize={8} borderRadius="50px" onClick={ () =>  router.push("https://github.com/mbrady20/")}/>
               </Box>
               
-             <Box p ='4'><IconButton aria-label="git hub" as={AiFillTwitterCircle} boxSize={8} borderRadius="50px" onClick={ async () =>  await router.push("https://twitter.com/MichaelJBrady9")}/></Box>
-              <Box p ='4'><IconButton aria-label="git hub" as={AiFillMail} boxSize={8} borderRadius="50px" onClick={ async () => await router.push("mailto:bradymichael362@gmail.com")}/></Box>
-              <Box p = '4'><IconButton aria-label="git hub" as={AiFillLinkedin} boxSize={8} borderRadius="50px" onClick={async () => await router.push("https://www.linkedin.com/in/michael-brady-a34976255/")}/></Box>
-              <Box p='4'><IconButton aria-label="git hub" as={AiFillInstagram} boxSize={8} borderRadius="50px" onClick={async () => await router.push("https://www.instagram.com/bradymichael362/")}/></Box>
+             <Box p ='4'><IconButton aria-label="git hub" as={AiFillTwitterCircle} boxSize={8} borderRadius="50px" onClick={  () =>   router.push("https://twitter.com/MichaelJBrady9")}/></Box>
+              <Box p ='4'><IconButton aria-label="git hub" as={AiFillMail} boxSize={8} borderRadius="50px" onClick={  () =>  router.push("mailto:bradymichael362@gmail.com")}/></Box>
+              <Box p = '4'><IconButton aria-label="git hub" as={AiFillLinkedin} boxSize={8} borderRadius="50px" onClick={ () =>  router.push("https://www.linkedin.com/in/michael-brady-a34976255/")}/></Box>
+              <Box p='4'><IconButton aria-label="git hub" as={AiFillInstagram} boxSize={8} borderRadius="50px" onClick={ () =>  router.push("https://www.instagram.com/bradymichael362/")}/></Box>
              
               </Flex>
               </Center>
@@ -94,6 +91,6 @@ export default function RootLayout({
           </Container>
          
         </Flex>
-        </div>
+        </Container>
   );
 }

@@ -63,9 +63,9 @@ export default function AboutPage() {
             <CardBody>
             <CardBody>
                 <Stack divider={<StackDivider />} spacing="4">
-                  <Text></Text>
+                  <Text>At the University of Wisconsin I'm majoring in Math, Computer Science and Physics.</Text>
 
-                  <Text></Text>
+                  <Text>During my free time I go to Badger games with my friends, practice at the Jiu Jitsu club and game at the Super Smash Bros. club.</Text>
                 </Stack>
               </CardBody>
             </CardBody>
@@ -108,10 +108,12 @@ export default function AboutPage() {
                 </Box>
               </Flex>
               <CardBody>
+              <br></br>
                 <Stack divider={<StackDivider />} spacing="4">
-                  <Text></Text>
+                  
+                  <Text>I spent my first year of college at Washington and Lee University. During my time there I was a varsity wrestler and physics major.</Text>
 
-                  <Text></Text>
+                  <Text>I transferred from Washington and Lee in search of a bigger school with more extracurricular opportunities.</Text>
                 </Stack>
               </CardBody>
             </CardHeader>
