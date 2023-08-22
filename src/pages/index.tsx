@@ -20,7 +20,7 @@ export default function Home() {
   const router = useRouter();
   return (
     
-<Head>
+
       <Container>
         <Container paddingY="50px">
           <Center>
@@ -81,8 +81,7 @@ export default function Home() {
           </Container>
         </Container>
       </Container>
-      </Head>
-
+     
  
   );
 }
