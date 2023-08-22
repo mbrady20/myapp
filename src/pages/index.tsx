@@ -11,6 +11,7 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import Head from "next/head";
 
 import { useRouter } from "next/router";
 
@@ -19,7 +20,7 @@ export default function Home() {
   const router = useRouter();
   return (
     
-
+<Head>
       <Container>
         <Container paddingY="50px">
           <Center>
@@ -80,7 +81,7 @@ export default function Home() {
           </Container>
         </Container>
       </Container>
-      
+      </Head>
 
  
   );
