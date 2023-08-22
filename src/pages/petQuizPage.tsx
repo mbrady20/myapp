@@ -57,7 +57,7 @@ export default function PetQuiz() {
       onOpen();
   }
 
-  async function submitPost(){
+  function submitPost(){
 
    mutation.mutate(
       {
@@ -67,7 +67,7 @@ export default function PetQuiz() {
         elGatoRank: elText
       }
     )
-    await router.push("/petQuizData")
+   
   }
   function sydneyClick() {
     setSydCount(sydCount + 1);
