@@ -10,10 +10,12 @@ import {
   Center,
   Spacer,
 } from "@chakra-ui/react";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 
 import { useRouter } from "next/router";
 
 export default function Home() {
+  const user = useUser();
   const router = useRouter();
   return (
     
@@ -43,8 +45,20 @@ export default function Home() {
                 More about me &rarr;
               </Button>
             </Center>
+            <Container >
+            <Center paddingTop={"25px"}>
+              <Text>Sign in to view the Pet Quiz!</Text>
+              </Center>
+              <Center paddingTop={"20px"}>
+            <div>
+              {!user.isSignedIn && <SignInButton><Button colorScheme={"telegram"}>Sign in!</Button></SignInButton>}
+              {!!user.isSignedIn && <SignOutButton><Button colorScheme={"telegram"}>Sign out?</Button></SignOutButton>}
+            </div>
+            </Center>
+            </Container>
           </Container>
-          <Container paddingTop={"10px"}>
+          
+          <Container paddingTop={"5px"}>
             <Center>
               <Text fontSize={"50px"} as="b">
                 Get in touch
@@ -56,7 +70,7 @@ export default function Home() {
    
             <Flex alignItems={"center"} paddingTop={"20px"}>
               <Box w="70px">
-                <Button bgColor={"blue.500"} color={"gray.300"} >Send Me an Email</Button>
+                <Button colorScheme="twitter">Send Me an Email</Button>
               </Box>
               <Spacer w="20px"></Spacer>
               <Box>

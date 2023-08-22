@@ -52,6 +52,9 @@ export default function PetQuiz() {
       onOpen();
   }
 
+  function submitPost(){
+    
+  }
   function sydneyClick() {
     setSydCount(sydCount + 1);
 
@@ -77,8 +80,11 @@ export default function PetQuiz() {
   }
   return (
     <Container minWidth={"90vw"}>
-      <Center paddingBottom={"20px"} paddingTop={"20px"}>
+      <Center paddingBottom={"10px"} paddingTop={"20px"}>
       <Text fontSize={"4xl"} as={"b"}>Which pet is the cutest?</Text>
+      </Center>
+      <Center paddingBottom={"15px"}>
+      <Text fontSize={"2xl"} textColor={"gray"}>Click on the images below to rank these pets.</Text>
       </Center>
       <Center>
         
