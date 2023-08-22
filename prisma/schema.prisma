@@ -12,16 +12,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Post {
-  id        String @id @default(cuid())
-  createdAt DateTime @default(now())
+model Rank {
 
-  authorId String
+  id Int @id @default(autoincrement()) 
 
   sydneyRank Int
   lokiRank   Int
   stuartRank Int
   elGatoRank Int
-
-  @@index([authorId])
 }

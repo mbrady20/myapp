@@ -17,6 +17,8 @@ import {
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Image from "next/image"
+import { useRouter } from "next/router";
+import { api } from "npm/utils/api";
 
 export default function PetQuiz() {
   const [sydCount, setSydCount] = useState(Number);
@@ -29,6 +31,9 @@ export default function PetQuiz() {
   const [elText, setElText] = useState(4);
   const [submitReady, setSubmitReady] = useState(false);
   const [alertText, setAlertText] = useState<string[]>(["","",""]);
+  
+  const router = useRouter();
+  const mutation = api.example.post.useMutation();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<HTMLButtonElement>(null);
@@ -53,7 +58,16 @@ export default function PetQuiz() {
   }
 
   function submitPost(){
-    setSubmitReady(false);
+
+    mutation.mutate(
+      {
+        sydneyRank: sydText,
+        lokiRank: lokText,
+        stuartRank: stuText,
+        elGatoRank: elText
+      }
+    )
+    router.push("/petQuizData")
   }
   function sydneyClick() {
     setSydCount(sydCount + 1);
@@ -141,7 +155,7 @@ export default function PetQuiz() {
               <Button ref={cancelRef} onClick={onClose}>
                 Change my answer!
               </Button>
-              <Button colorScheme="telegram" isDisabled={!submitReady}>
+              <Button colorScheme="telegram" isDisabled={!submitReady} onClick={submitPost}>
                 Submit!
               </Button>
               </SimpleGrid>

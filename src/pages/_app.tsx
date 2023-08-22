@@ -6,14 +6,23 @@ import type { AppProps, AppType } from 'next/app';
 import { appRouter } from 'npm/server/api/root';
 import { api } from 'npm/utils/api';
 
-const MyApp: AppType = ({Component, pageProps}: AppProps) => {
+const MyApp: AppType = ({Component, pageProps, ...appProps}: AppProps) => {
+
+  const getContent = () => {
+    if([`/petQuizData`].includes(appProps.router.pathname))
+      return <Component {...pageProps}/>;
+
+      return(
+      <RootLayout>
+        <Component {...pageProps} />
+      </RootLayout>
+      );
+  }
   return (
     <ClerkProvider>
     
     <ChakraProvider>
-      <RootLayout>
-        <Component {...pageProps} />
-      </RootLayout>
+      {getContent()}
     </ChakraProvider>
     </ClerkProvider>
   )
