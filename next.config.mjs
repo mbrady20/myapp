@@ -8,6 +8,13 @@ await import("./src/env.mjs");
 const config = {
   reactStrictMode: true,
 
+  webpack: (config) => {
+    config.module.rules.push({
+       test: /\.node/,
+      use: 'raw-loader',
+     });
+     return config;
+    },
   /**
    * If you are using `appDir` then you must comment the below `i18n` config out.
    *
@@ -18,5 +25,6 @@ const config = {
     defaultLocale: "en",
   },
 };
+
 
 export default config;

@@ -16,6 +16,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@prisma/client": "^5.1.1",
+    "@simplepdf/react-embed-pdf": "^1.4.0",
     "@t3-oss/env-nextjs": "^0.3.1",
     "@tanstack/react-query": "^4.29.25",
     "@trpc/client": "^10.34.0",
@@ -24,9 +25,11 @@
     "@trpc/server": "^10.34.0",
     "framer-motion": "^10.16.1",
     "next": "^13.4.19",
+    "pdfjs-dist": "^3.9.179",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
+    "react-pdf": "^7.3.3",
     "superjson": "^1.13.1",
     "yarn": "^1.22.19",
     "zod": "^3.21.4"
@@ -46,6 +49,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
     "prisma": "^5.1.1",
+    "raw-loader": "^4.0.2",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.0.4"
   },

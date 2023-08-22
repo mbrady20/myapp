@@ -51,7 +51,7 @@ export default function PetQuiz() {
     }
       onOpen();
   }
-  
+
   function sydneyClick() {
     setSydCount(sydCount + 1);
 
@@ -77,7 +77,11 @@ export default function PetQuiz() {
   }
   return (
     <Container minWidth={"90vw"}>
+      <Center paddingBottom={"20px"} paddingTop={"20px"}>
+      <Text fontSize={"4xl"} as={"b"}>Which pet is the cutest?</Text>
+      </Center>
       <Center>
+        
         <SimpleGrid columns={2} spacing={10}>
           <GridItem rowSpan={1}>
             <button onClick={() => sydneyClick()}>
@@ -104,11 +108,12 @@ export default function PetQuiz() {
             <Text>El Gato {elText}</Text>
           </GridItem>
           <GridItem colSpan={2}>
-            <Center>
-              <Button onClick={submitButton}>Submit!</Button>
-            </Center>
+    
           </GridItem>
         </SimpleGrid>
+      </Center>
+      <Center>
+      <Button onClick={submitButton}>Submit!</Button>
       </Center>
       <AlertDialog
           isOpen={isOpen}
