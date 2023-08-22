@@ -19,7 +19,7 @@ export default function Home() {
   const user = useUser();
   const router = useRouter();
   return (
-    
+
 
       <Container>
         <Container paddingY="50px">
