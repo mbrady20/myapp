@@ -67,7 +67,7 @@ export default function PetQuiz() {
         elGatoRank: elText
       }
     )
-    router.push("/petQuizData")
+    await router.push("/petQuizData")
   }
   function sydneyClick() {
     setSydCount(sydCount + 1);
