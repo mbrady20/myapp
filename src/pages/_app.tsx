@@ -2,12 +2,14 @@
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import RootLayout from './layout';
 import { ClerkProvider } from '@clerk/nextjs';
-import type { AppProps } from 'next/app';
+import type { AppProps, AppType } from 'next/app';
 import { appRouter } from 'npm/server/api/root';
+import { api } from 'npm/utils/api';
 
-function MyApp({Component, pageProps}: AppProps) {
+const MyApp: AppType = ({Component, pageProps}: AppProps) => {
   return (
     <ClerkProvider>
+    
     <ChakraProvider>
       <RootLayout>
         <Component {...pageProps} />
@@ -17,4 +19,4 @@ function MyApp({Component, pageProps}: AppProps) {
   )
 }
 
-export default MyApp;
+export default api.withTRPC(MyApp);
