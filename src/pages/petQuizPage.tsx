@@ -41,20 +41,17 @@ export default function PetQuiz() {
       lokText == stuText ||
       lokText == elText ||
       stuText == elText
-    )
+    ){
     setSubmitReady(false);
-    else
+    setAlertText(["Please make sure you\'ve given each pet a different ranking",""]);
+    }
+    else{
       setSubmitReady(true);
+      setAlertText(["Do you want to submit this ranking?", `Sydney: ${sydText}\nLoki: ${lokText}\nStuart: ${stuText}\nEl Gato: ${elText}`]);
+    }
       onOpen();
   }
-
-  useEffect(() => {
-    if(submitReady)
-      setAlertText(["Do you want to submit this ranking?", `Sydney: ${sydText}\nLoki: ${lokText}\nStuart: ${stuText}\nEl Gato: ${elText}`]);
-    
-    else
-      setAlertText(["Please make sure you\'ve given each pet a different ranking",""]);
-  });
+  
   function sydneyClick() {
     setSydCount(sydCount + 1);
 
