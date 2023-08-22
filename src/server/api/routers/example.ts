@@ -19,7 +19,7 @@ export const exampleRouter = createTRPCRouter({
       elGatoRank: z.number(),
     })
   ).mutation (async({input, ctx}) => {
-      ctx.prisma.rank.create({
+      await ctx.prisma.rank.create({
         data: {
           id: 0, 
           sydneyRank: input.sydneyRank, 
