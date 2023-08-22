@@ -59,7 +59,7 @@ export default function PetQuiz() {
 
   async function submitPost(){
 
-    await mutation.mutate(
+   mutation.mutate(
       {
         sydneyRank: sydText,
         lokiRank: lokText,
