@@ -61,10 +61,10 @@ export default function PetQuiz() {
 
    mutation.mutate(
       {
-        sydneyRank: sydText,
-        lokiRank: lokText,
-        stuartRank: stuText,
-        elGatoRank: elText
+        sydneyRank: sydText.valueOf(),
+        lokiRank: lokText.valueOf(),
+        stuartRank: stuText.valueOf(),
+        elGatoRank: elText.valueOf()
       }
     )
    
