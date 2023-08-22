@@ -1,11 +1,12 @@
+import { Container } from "@chakra-ui/react";
 import { api } from "npm/utils/api";
 
 export default function PetQuizData() {
 
     const { data } = api.example.getAll.useQuery();
     return(
-        <div>
-
-        </div>
+        <Container>
+            hello
+        </Container>
     )
 }
