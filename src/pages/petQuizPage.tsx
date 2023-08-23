@@ -169,7 +169,7 @@ export default function PetQuiz() {
               <Button ref={cancelRef} onClick={onClose}>
                 Change my answer!
               </Button>
-              <Button colorScheme="telegram" isDisabled={!submitReady} onClick={submitPost}>
+              <Button colorScheme="telegram" isDisabled={false} onClick={submitPost}>
                 Submit!
               </Button>
               </SimpleGrid>
