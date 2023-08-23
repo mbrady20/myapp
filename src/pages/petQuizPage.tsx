@@ -81,6 +81,7 @@ export default function PetQuiz() {
       }
     )
 
+    setIsSubmitted(true);
     await router.push("/petQuizData");
    
   }
