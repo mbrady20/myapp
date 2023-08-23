@@ -68,7 +68,7 @@ export default function PetQuiz() {
 
   const { isLoaded, isSignedIn, user } = useUser() as UseUserT;
 
-  function submitPost(){
+  async function submitPost(){
     const userman = user.id;
 
    mutation.mutate(
@@ -81,7 +81,7 @@ export default function PetQuiz() {
       }
     )
 
-    router.push("/petQuizData");
+    await router.push("/petQuizData");
    
   }
   function sydneyClick() {
