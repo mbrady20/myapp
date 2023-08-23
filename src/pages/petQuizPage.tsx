@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 import { api } from "npm/utils/api";
 import { currentUser, useUser } from "@clerk/nextjs";
 
-export default async function PetQuiz() {
+export default function PetQuiz() {
   const [sydCount, setSydCount] = useState(Number);
   const [lokCount, setLokCount] = useState(Number);
   const [stuCount, setStuCount] = useState(Number);
