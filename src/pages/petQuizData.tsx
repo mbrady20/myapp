@@ -25,7 +25,10 @@ export default function PetQuizData() {
         setLokRank(5 - element.lokiRank + lokRank);
         setStuRank(5 - element.stuartRank + stuRank);
         setElRank(5 - element.elGatoRank + elRank);
+        console.log(elRank);
       }
+
+   
     );
   }, [data]);
 
