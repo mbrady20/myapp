@@ -47,8 +47,14 @@ export default function PetQuizData() {
       total: (elRank / totRank) * 100
     },
   ];
+  function func() {
+    console.log(data);
+    }
+    
+
   return (
     <Container bg="blue.50" minWidth={"100vw"} minHeight={"100vh"}>
+        <Button onClick={func}></Button>
       <ResponsiveContainer width="80%" height={300}>
         <BarChart data={data1}>
           <XAxis
