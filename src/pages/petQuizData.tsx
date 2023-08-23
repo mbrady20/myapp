@@ -49,6 +49,7 @@ export default function PetQuizData() {
   ];
   function func() {
     console.log(data);
+    console.log(data1);
     }
     
 
