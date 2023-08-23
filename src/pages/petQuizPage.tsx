@@ -32,6 +32,7 @@ export default function PetQuiz() {
   const [elText, setElText] = useState(4);
   const [submitReady, setSubmitReady] = useState(false);
   const [alertText, setAlertText] = useState<string[]>(["","",""]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   
   const router = useRouter();
   const mutation = api.example.post.useMutation();
@@ -147,7 +148,8 @@ export default function PetQuiz() {
         </SimpleGrid>
       </Center>
       <Center>
-      <Button onClick={submitButton}>Submit!</Button>
+        {!isSubmitted && <Button onClick={submitButton}>Submit!</Button>}
+        {!!isSubmitted && <Button onClick={() => router.push("petQuizData")}>View Results!</Button>}
       </Center>
       <AlertDialog
           isOpen={isOpen}
@@ -169,9 +171,9 @@ export default function PetQuiz() {
               <Button ref={cancelRef} onClick={onClose}>
                 Change my answer!
               </Button>
-              <Button colorScheme="telegram" isDisabled={false} onClick={submitPost}>
+              {submitReady && <Button colorScheme="telegram" onClick={submitPost}>
                 Submit!
-              </Button>
+              </Button>}
               </SimpleGrid>
             </AlertDialogFooter>
           </AlertDialogContent>
