@@ -69,7 +69,7 @@ export default function PetQuiz() {
   const { isLoaded, isSignedIn, user } = useUser() as UseUserT;
 
   function submitPost(){
-    const userman = user.id as string;
+    const userman = user.id;
 
    mutation.mutate(
       {
