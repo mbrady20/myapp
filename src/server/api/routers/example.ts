@@ -7,8 +7,8 @@ import { clerkClient, currentUser } from "@clerk/nextjs";
 
 export const exampleRouter = createTRPCRouter({
   
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.rank.findMany();
+  getAll: publicProcedure.query( async ({ ctx }) => {
+    return await ctx.prisma.rank.findMany();
   }),
 
   post: publicProcedure
