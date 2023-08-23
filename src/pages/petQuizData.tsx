@@ -11,8 +11,17 @@ export default function PetQuizData() {
   const [stuRank, setStuRank] = useState(0);
   const [elRank, setElRank] = useState(0);
   const [totRank, setTotRank] = useState(0);
+  var sydCount;
+  var lokCount;
+  var stuCount;
+  var elCount;
 
   useEffect(() => {
+    let sydCount = 0;
+    let lokCount = 0;
+    let stuCount = 0;
+    let elCount = 0;
+    let count = 0;
     data?.forEach(
       (element: {
         sydneyRank: number;
@@ -20,16 +29,18 @@ export default function PetQuizData() {
         stuartRank: number;
         elGatoRank: number;
       }) => {
-        setTotRank(totRank + 4);
-        setSydRank(5 - element.sydneyRank + sydRank);
-        setLokRank(5 - element.lokiRank + lokRank);
-        setStuRank(5 - element.stuartRank + stuRank);
-        setElRank(5 - element.elGatoRank + elRank);
-        console.log(element);
+        count = count + 4;
+        sydCount = 5 - element.sydneyRank + sydCount;
+        lokCount = 5 - element.lokiRank + lokCount;
+        stuCount = 5 - element.stuartRank + stuCount;
+        elCount = 5 - element.elGatoRank + elCount;
       }
-
-   
     );
+    setSydRank(sydCount);
+    setLokRank(lokCount);
+    setStuRank(stuCount);
+    setElRank(elCount);
+    setTotRank(count);
   }, [data]);
 
   const data1 = [
