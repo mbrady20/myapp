@@ -5,6 +5,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import type { AppProps, AppType } from 'next/app';
 import { appRouter } from 'npm/server/api/root';
 import { api } from 'npm/utils/api';
+import { RecoilRoot } from 'recoil';
 
 const MyApp: AppType = ({Component, pageProps, ...appProps}: AppProps) => {
 
@@ -20,10 +21,11 @@ const MyApp: AppType = ({Component, pageProps, ...appProps}: AppProps) => {
   }
   return (
     <ClerkProvider>
-    
+      <RecoilRoot>
     <ChakraProvider>
       {getContent()}
     </ChakraProvider>
+    </RecoilRoot>
     </ClerkProvider>
   )
 }

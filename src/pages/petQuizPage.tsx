@@ -20,6 +20,7 @@ import Image from "next/image"
 import { useRouter } from "next/router";
 import { api } from "npm/utils/api";
 import { currentUser, useUser } from "@clerk/nextjs";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
 
 export default function PetQuiz() {
   const [sydCount, setSydCount] = useState(Number);
@@ -32,8 +33,20 @@ export default function PetQuiz() {
   const [elText, setElText] = useState(4);
   const [submitReady, setSubmitReady] = useState(false);
   const [alertText, setAlertText] = useState<string[]>(["","",""]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+
+const submittedState = atom({
+  key: 'submittedState',
+  default: false
+})
+
+const answerState = atom({
+  key: 'answerState'
+})
+ 
+const [isSubmitted, setIsSubmitted] = useRecoilState(submittedState);
   
+
+
   const router = useRouter();
   const mutation = api.example.post.useMutation();
   
