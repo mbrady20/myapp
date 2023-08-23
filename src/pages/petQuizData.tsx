@@ -11,17 +11,13 @@ export default function PetQuizData() {
   const [stuRank, setStuRank] = useState(0);
   const [elRank, setElRank] = useState(0);
   const [totRank, setTotRank] = useState(0);
-  var sydCount;
-  var lokCount;
-  var stuCount;
-  var elCount;
+  let sydCount = 0;
+  let lokCount = 0;
+  let stuCount = 0;
+  let elCount = 0;
+  let count = 0;
 
   useEffect(() => {
-    let sydCount = 0;
-    let lokCount = 0;
-    let stuCount = 0;
-    let elCount = 0;
-    let count = 0;
     data?.forEach(
       (element: {
         sydneyRank: number;
