@@ -40,7 +40,6 @@ export default function PetQuiz() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<HTMLButtonElement>(null);
   function submitButton() {
-    console.log(sydText);
     if (
       sydText == lokText ||
       sydText == stuText ||

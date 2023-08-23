@@ -1,80 +1,73 @@
+"use client";
 import { Button, Card, Container } from "@chakra-ui/react";
 import { api } from "npm/utils/api";
 import { useEffect, useState } from "react";
-import { Bar } from 'react-chartjs-2';
-
-
-
-
-
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 export default function PetQuizData() {
+  const { data } = api.example.getAll.useQuery();
+  const [sydRank, setSydRank] = useState(0);
+  const [lokRank, setLokRank] = useState(0);
+  const [stuRank, setStuRank] = useState(0);
+  const [elRank, setElRank] = useState(0);
+  const [totRank, setTotRank] = useState(0);
 
+  useEffect(() => {
+    data?.forEach(
+      (element: {
+        sydneyRank: number;
+        lokiRank: number;
+        stuartRank: number;
+        elGatoRank: number;
+      }) => {
+        setTotRank(totRank + 4);
+        setSydRank(5 - element.sydneyRank + sydRank);
+        setLokRank(5 - element.lokiRank + lokRank);
+        setStuRank(5 - element.stuartRank + stuRank);
+        setElRank(5 - element.elGatoRank + elRank);
+      }
+    );
+  }, [data]);
 
-const { data } = api.example.getAll.useQuery();
-const [sydRank, setSydRank] = useState(0);
-const [lokRank, setLokRank] = useState(0);
-const [stuRank, setStuRank] = useState(0);
-const [elRank, setElRank] = useState(0);
-const [totRank, setTotRank] = useState(0);
-
-
-useEffect(() => {
-data?.forEach((element: { sydneyRank: number; lokiRank: number; stuartRank: number; elGatoRank: number; }) => {
-setTotRank(totRank + 4);
-setSydRank(5 - element.sydneyRank + sydRank);
-setLokRank(5 - element.lokiRank + lokRank);
-setStuRank(5 - element.stuartRank + stuRank);
-setElRank(5 - element.elGatoRank + elRank);
-});
-}, [data] );
-
-const data1 = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 1
-    }]
-  }
-
-
-function func() {
-console.log(data);
+  const data1 = [
+    {
+      name: "Sydney",
+      total: (sydRank / totRank) * 100,
+    },
+    {
+      name: "Loki",
+      total: (lokRank / totRank) * 100,
+    },
+    {
+      name: "Stuart",
+      total: (stuRank / totRank) * 100,
+    },
+    {
+      name: "El Gato",
+      total: (elRank / totRank) * 100
+    },
+  ];
+  return (
+    <Container bg="blue.50" minWidth={"100vw"} minHeight={"100vh"}>
+      <ResponsiveContainer width="80%" height={300}>
+        <BarChart data={data1}>
+          <XAxis
+            dataKey="name"
+            stroke="#888888"
+            fontSize={12}
+            tickLine={false}
+            axisLine={false}
+          />
+          <YAxis
+            stroke="#888888"
+            fontSize={12}
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={(value) => `%${value}`}
+          />
+          <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+        </BarChart>
+      </ResponsiveContainer>
+    </Container>
+  );
 }
-return(
-<Container bg="blue.50" minWidth={"100vw"} minHeight={"100vh"}>
-<Button onClick={func}></Button>
-<Bar
-    data={data1}
-/>
-</Container>
-);
-};
-
-
-
-
-
-
-
-
-
-
-
