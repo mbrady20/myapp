@@ -20,7 +20,7 @@ export default function PetQuizData() {
             setElRank(5 - element.elGatoRank + elRank);
             });
             
-    }, [window] );
+    }, [data] );
 
     
 
