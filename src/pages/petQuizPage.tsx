@@ -80,6 +80,8 @@ export default function PetQuiz() {
         authorId: userman
       }
     )
+
+    router.push("/petQuizData")
    
   }
   function sydneyClick() {
