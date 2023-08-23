@@ -9,7 +9,7 @@ import { api } from 'npm/utils/api';
 const MyApp: AppType = ({Component, pageProps, ...appProps}: AppProps) => {
 
   const getContent = () => {
-    if([`/petQuizData`].includes(appProps.router.pathname))
+    if([`/petQuizDat`].includes(appProps.router.pathname))
       return <Component {...pageProps}/>;
 
       return(
