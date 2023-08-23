@@ -81,7 +81,7 @@ export default function PetQuiz() {
       }
     )
 
-    router.push("/petQuizData")
+    router.push("/petQuizData");
    
   }
   function sydneyClick() {
