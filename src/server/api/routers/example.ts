@@ -1,6 +1,7 @@
 import { Schema, z } from "zod";
 import { createTRPCRouter, publicProcedure } from "npm/server/api/trpc";
 import { Prisma, Rank } from "@prisma/client";
+import { clerkClient, currentUser } from "@clerk/nextjs";
 
 
 
@@ -17,6 +18,7 @@ export const exampleRouter = createTRPCRouter({
       lokiRank: z.number(),
       stuartRank: z.number(),
       elGatoRank: z.number(),
+      authorId: z.string(),
     })
   ).mutation (async({input, ctx}) => {
       const post = await ctx.prisma.rank.create({
@@ -24,7 +26,8 @@ export const exampleRouter = createTRPCRouter({
           sydneyRank: input.sydneyRank, 
           lokiRank: input.lokiRank, 
           stuartRank: input.stuartRank, 
-          elGatoRank: input.elGatoRank
+          elGatoRank: input.elGatoRank,
+          authorId: input.authorId
         }
       });
 

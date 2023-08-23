@@ -19,8 +19,9 @@ import { useState } from "react";
 import Image from "next/image"
 import { useRouter } from "next/router";
 import { api } from "npm/utils/api";
+import { currentUser, useUser } from "@clerk/nextjs";
 
-export default function PetQuiz() {
+export default async function PetQuiz() {
   const [sydCount, setSydCount] = useState(Number);
   const [lokCount, setLokCount] = useState(Number);
   const [stuCount, setStuCount] = useState(Number);
@@ -34,6 +35,7 @@ export default function PetQuiz() {
   
   const router = useRouter();
   const mutation = api.example.post.useMutation();
+  
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<HTMLButtonElement>(null);
@@ -57,14 +59,25 @@ export default function PetQuiz() {
       onOpen();
   }
 
+
+  interface UseUserT {
+    isLoaded: boolean;
+    isSignedIn: boolean;
+    user: { id: string };
+  }
+
+  const { isLoaded, isSignedIn, user } = useUser() as UseUserT;
+
   function submitPost(){
+    const userman = user.id as string;
 
    mutation.mutate(
       {
         sydneyRank: sydText.valueOf(),
         lokiRank: lokText.valueOf(),
         stuartRank: stuText.valueOf(),
-        elGatoRank: elText.valueOf()
+        elGatoRank: elText.valueOf(),
+        authorId: userman
       }
     )
    

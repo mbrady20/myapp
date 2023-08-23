@@ -15,9 +15,14 @@ generator client {
 model Rank {
 
   id Int @id @default(autoincrement()) 
+  createdAt DateTime @default(now())
+
+  authorId String
 
   sydneyRank Int
   lokiRank   Int
   stuartRank Int
   elGatoRank Int
+
+  @@index([authorId])
 }
