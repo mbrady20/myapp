@@ -63,11 +63,11 @@ export default function PetQuizData() {
       <Grid
         templateRows="repeat(2, 1fr)"
         templateColumns="repeat(10, 1fr)"
-        gap={1}
+        gap={0}
       >
-        <GridItem colSpan={2} height={"100vh"} bg="blue.100"></GridItem>
-        <GridItem>
-          <ResponsiveContainer width="80%" height={300}>
+        <GridItem colSpan={1} height={"100vh"} bg="blue.100"></GridItem>
+        <GridItem colSpan={9} height={"80vh"}>
+          <ResponsiveContainer>
             <BarChart data={data1}>
               <XAxis
                 dataKey="name"
