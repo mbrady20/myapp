@@ -93,11 +93,13 @@ export default function RootLayout({
               <Grid
               h='70px'
               templateRows='repeat(2, 1fr)'
-              templateColumns='repeat(9, 1fr)'
+              templateColumns='repeat(10, 1fr)'
               gap={1}
              w='500px'
               >
-       
+                <GridItem colSpan={1} rowSpan={2} as="aside">
+                  <AlertIcon />
+                </GridItem>
             
                 <GridItem  rowSpan={1} colSpan={8}>
                   <AlertTitle>My email is bradymichael362@gmail.com</AlertTitle>
@@ -107,9 +109,13 @@ export default function RootLayout({
                     Please don't hesitate to send me a message there!
                   </AlertDescription>
                 </GridItem> 
-                <GridItem colSpan={1} rowSpan={1}>
+                <GridItem colSpan={1} rowSpan={2}>
                   <CloseButton
-         
+                    alignSelf="flex-start"
+                    position="relative"
+                    right={-1}
+                    top={-1}
+                    onClick={onClose}
                   />
                 </GridItem>
           

@@ -28,8 +28,18 @@ export default function PetQuiz() {
   const [lokCount, setLokCount] = useState(4);
   const [stuCount, setStuCount] = useState(4);
   const [elCount, setElCount] = useState(4);
+ 
   const [submitReady, setSubmitReady] = useState(false);
   const [alertText, setAlertText] = useState<string[]>(["", "", ""]);
+
+  const sydText = 4
+  const sydTextRef = useRef(sydText);
+  const lokText = 4
+  const lokTextRef = useRef(lokText);
+  const stuText = 4
+  const stuTextRef = useRef(stuText);
+  const elText = 4
+  const elTextRef = useRef(elText);
 
   const [isSubmitted, setIsSubmitted] = useRecoilState(submittedState);
   const [answer, setAnswer] = useRecoilState(answerState);
@@ -74,6 +84,12 @@ export default function PetQuiz() {
   async function submitPost() {
     const userman = user.id;
 
+    setAnswer({
+      syd: sydTextRef.current,
+      lok: lokTextRef.current,
+      stu: stuTextRef.current,
+      el: elTextRef.current
+    })
     mutation.mutate({
       sydneyRank: answer.syd,
       lokiRank: answer.lok,
@@ -89,12 +105,7 @@ export default function PetQuiz() {
     if(!isSubmitted){
     setSydCount(sydCount + 1);
 
-    setAnswer({
-      syd: (sydCount % 4) + 1,
-      lok: answer.lok,
-      stu: answer.stu,
-      el: answer.el,
-    });
+    sydTextRef.current = (sydCount % 4) + 1;
   }
   }
 
@@ -102,12 +113,26 @@ export default function PetQuiz() {
     if(!isSubmitted){
     setLokCount(lokCount + 1);
 
-    setAnswer({
-      syd: answer.syd,
-      lok: (lokCount % 4) + 1,
-      stu: answer.stu,
-      el: answer.el,
-    });
+    lokTextRef.current = (lokCount % 4) + 1;
+
+  }
+  }
+
+
+
+  function stuClick() {
+    if(!isSubmitted){
+    setStuCount(stuCount + 1);
+
+   stuTextRef.current = (stuCount % 4) + 1;
+  }
+  }
+
+  function elClick() {
+    if(!isSubmitted){
+    setElCount(elCount + 1);
+
+   elTextRef.current = (elCount % 4) + 1;
   }
   }
 
@@ -118,31 +143,7 @@ export default function PetQuiz() {
       return 1;
   }
 
-  function stuClick() {
-    if(!isSubmitted){
-    setStuCount(stuCount + 1);
 
-    setAnswer({
-      syd: answer.syd,
-      lok: answer.lok,
-      stu: (stuCount % 4) +1,
-      el: answer.el,
-    });
-  }
-  }
-
-  function elClick() {
-    if(!isSubmitted){
-    setElCount(elCount + 1);
-
-    setAnswer({
-      syd: answer.syd,
-      lok: answer.lok,
-      stu: answer.stu,
-      el: (elCount % 4) + 1,
-    });
-  }
-  }
   return (
     <Container minWidth={"90vw"}>
       <Center paddingBottom={"10px"} paddingTop={"20px"}>
@@ -166,13 +167,13 @@ export default function PetQuiz() {
                 alt="Sydney"
               ></Image>
             </button>
-            <Text>Sydney: {answer.syd}</Text>
+            <Text>Sydney: {sydTextRef.current}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => lokClick()}>
               <Image src="/loki.png" width={150} height={80} alt="Loki"></Image>
             </button>
-            <Text>Loki: {answer.lok}</Text>
+            <Text>Loki: {lokTextRef.current}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => stuClick()}>
@@ -183,7 +184,7 @@ export default function PetQuiz() {
                 alt="Stuart"
               ></Image>
             </button>
-            <Text>Stuart: {answer.stu}</Text>
+            <Text>Stuart: {stuTextRef.current}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => elClick()}>
@@ -194,7 +195,7 @@ export default function PetQuiz() {
                 alt="El Gato"
               ></Image>
             </button>
-            <Text>El Gato {answer.el}</Text>
+            <Text>El Gato {elTextRef.current}</Text>
           </GridItem>
           <GridItem colSpan={2}></GridItem>
         </SimpleGrid>
