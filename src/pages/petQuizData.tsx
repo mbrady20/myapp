@@ -10,6 +10,7 @@ import {
   Icon,
   Text,
 } from "@chakra-ui/react";
+import { AnyObject } from "chart.js/dist/types/basic";
 import router from "next/router";
 import { api } from "npm/utils/api";
 import { useEffect, useState } from "react";
@@ -134,7 +135,7 @@ export default function PetQuizData() {
     percent,
     name,
     index,
-  }: any) => {
+  }: AnyObject) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
