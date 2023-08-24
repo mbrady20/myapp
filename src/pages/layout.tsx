@@ -16,6 +16,7 @@ import {
   SimpleGrid,
   GridItem,
   Grid,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
@@ -93,7 +94,6 @@ export default function RootLayout({
           {isOpen && (
             <Alert status="info" maxWidth={"500px"} minWidth={"300px"}>
               <Grid
-            
               templateRows='repeat(2, 1fr)'
               templateColumns='repeat(10, 1fr)'
               gap={1}
@@ -174,7 +174,7 @@ export default function RootLayout({
 
               <Box p="4">
                 <IconButton
-                  aria-label="git hub"
+                  aria-label="twitter"
                   as={AiFillTwitterCircle}
                   boxSize={8}
                   borderRadius="50px"
@@ -183,17 +183,16 @@ export default function RootLayout({
                   }
                 />
               </Box>
-              <Box p="4">
+    {/*           <Box p="4">
+                <Tooltip label='bradymichael362@gmail.com' placement="bottom">
                 <IconButton
-                  aria-label="git hub"
+                  aria-label="email"
                   as={AiFillMail}
                   boxSize={8}
                   borderRadius="50px"
-                  onClick={() =>
-                    router.push("mailto:bradymichael362@gmail.com")
-                  }
                 />
-              </Box>
+                </Tooltip>
+              </Box> */}
               <Box p="4">
                 <IconButton
                   aria-label="git hub"

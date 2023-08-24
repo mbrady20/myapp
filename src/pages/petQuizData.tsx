@@ -1,5 +1,5 @@
 "use client";
-import { Button, Card, Container } from "@chakra-ui/react";
+import { Button, Card, Container, Grid, GridItem } from "@chakra-ui/react";
 import { api } from "npm/utils/api";
 import { useEffect, useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
@@ -54,37 +54,40 @@ export default function PetQuizData() {
     },
     {
       name: "El Gato",
-      total: (elRank / totRank) * 100
+      total: (elRank / totRank) * 100,
     },
   ];
-  function func() {
-    console.log(data);
-    console.log(data1);
-    }
-    
 
   return (
     <Container bg="blue.50" minWidth={"100vw"} minHeight={"100vh"}>
-        <Button onClick={func}></Button>
-      <ResponsiveContainer width="80%" height={300}>
-        <BarChart data={data1}>
-          <XAxis
-            dataKey="name"
-            stroke="#888888"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-          />
-          <YAxis
-            stroke="#888888"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-            tickFormatter={(value) => `%${value}`}
-          />
-          <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
-        </BarChart>
-      </ResponsiveContainer>
+      <Grid
+        templateRows="repeat(2, 1fr)"
+        templateColumns="repeat(10, 1fr)"
+        gap={1}
+      >
+        <GridItem colSpan={2} height={"100vh"} bg="blue.100"></GridItem>
+        <GridItem>
+          <ResponsiveContainer width="80%" height={300}>
+            <BarChart data={data1}>
+              <XAxis
+                dataKey="name"
+                stroke="#888888"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+              />
+              <YAxis
+                stroke="#888888"
+                fontSize={12}
+                tickLine={false}
+                axisLine={false}
+                tickFormatter={(value) => `%${value}`}
+              />
+              <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </GridItem>
+      </Grid>
     </Container>
   );
 }
