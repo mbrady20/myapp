@@ -56,7 +56,7 @@ export default function Home() {
             <Center paddingTop={"25px"}>
              {!user.isSignedIn && <Text>Sign in to take the Pet Quiz!</Text> }
              {user.isSignedIn && !isSubmitted && <Text>Take the Pet Quiz! or sign out if you want...</Text>}
-             {user.isSignedIn && isSubmitted && <Text>Sure you don't want to take another look at your results?</Text>}
+             {user.isSignedIn && isSubmitted && <Text>Sure you don&apos;t want to take another look at your results?</Text>}
               </Center>
               <Center paddingTop={"20px"}>
               {user.isSignedIn && !isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizPage")}>Pet Quiz!</Button>}
