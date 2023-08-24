@@ -106,7 +106,7 @@ export default function RootLayout({
                 </GridItem>
                 <GridItem  rowSpan={1} colSpan={8}>
                   <AlertDescription>
-                    Please don't hesitate to send me a message there!
+                    Please don&apos;t hesitate to send me a message there!
                   </AlertDescription>
                 </GridItem> 
                 <GridItem colSpan={1} rowSpan={2}>
