@@ -68,6 +68,7 @@ export default function PetQuizData() {
         if (element.lokiRank == 1) ++lokOneCount;
         if (element.stuartRank == 1) ++stuOneCount;
         if (element.elGatoRank == 1) ++elOneCount;
+
       }
     );
     setSydRank(sydCount);
@@ -79,8 +80,6 @@ export default function PetQuizData() {
     setStuRankOne(stuOneCount);
     setElRankOne(elOneCount);
     setTotCount(count);
-
-
   }, [data]);
 
   const barChartData = [
@@ -104,22 +103,22 @@ export default function PetQuizData() {
 
   const pieChartData = [
     {
-        name: "Sydney",
-        total: (sydOneCount / totCount),
+      name: "Sydney",
+      value: (sydOneCount / totCount) * 100,
     },
     {
-        name: "Loki",
-        total: (lokOneCount / totCount),
+      name: "Loki",
+      value: (lokOneCount / totCount) * 100,
     },
     {
-        name: "Stuart",
-        total: (stuOneCount / totCount),
+      name: "Stuart",
+      value: (stuOneCount / totCount) * 100,
     },
     {
-        name: "El Gato",
-        total: (elOneCount / totCount)
-    }
-  ]
+      name: "El Gato",
+      value: (elOneCount / totCount) * 100,
+    },
+  ];
   function resultsButtonClick() {
     setViewMode1(true);
     setViewMode2(true);
@@ -239,11 +238,19 @@ export default function PetQuizData() {
 
       {!viewMode1 && viewMode2 && (
         <GridItem colSpan={9} height={"100vh"} bg="yellow.50">
-          <ResponsiveContainer>
-            <PieChart width={740} height={500}>
-                <Pie data={pieChartData} dataKey={"hello"}/>
-            </PieChart>
-          </ResponsiveContainer>
+          <Center>
+            <Text height={"10vh"} paddingTop={"10px"} as="b" fontSize={"3xl"}>
+              Percentage of voters who voted each pet the cutest
+            </Text>
+          </Center>
+          <Container height={"90vh"} minWidth={"90vw"}>
+          <ResponsiveContainer width="100%" height="100%">
+        <PieChart width={400} height={400}>
+          <Pie data={pieChartData} dataKey="value" cx="50%" cy="50%" outerRadius={60} fill="#8884d8" />
+          <Pie data={pieChartData} dataKey="value" cx="50%" cy="50%" innerRadius={70} outerRadius={90} fill="#82ca9d" label />
+        </PieChart>
+      </ResponsiveContainer>
+          </Container>
         </GridItem>
       )}
 
