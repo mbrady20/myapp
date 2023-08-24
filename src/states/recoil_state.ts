@@ -1,5 +1,5 @@
 import { atom } from "recoil"
-import { Answer } from "npm/pages/interfaces/answer.interface"
+import { Answer } from "npm/interfaces/answer.interface"
 const submittedState = atom({
     key: 'submittedState',
     default: false
