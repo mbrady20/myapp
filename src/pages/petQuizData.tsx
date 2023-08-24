@@ -1,5 +1,6 @@
 "use client";
-import { Button, Card, Container, Grid, GridItem } from "@chakra-ui/react";
+import { Button, Card, Container, Grid, GridItem, Text} from "@chakra-ui/react";
+import router from "next/router";
 import { api } from "npm/utils/api";
 import { useEffect, useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
@@ -65,11 +66,15 @@ export default function PetQuizData() {
         gap={0}
       >
         <GridItem colSpan={1} height={"100vh"} bg="blue.100">
-            <Button >
-
+            <Button onClick={() => router.push("/")
+            }>
+                Home Page
             </Button>
         </GridItem>
-        <GridItem colSpan={9} height={"80vh"} bg="green.50" paddingTop={"25px"}>
+        <GridItem colSpan={9} height={"80vh"} bg="green.50" >
+            <Text height={"20"}>
+                Percentage of vote share for each pet
+            </Text>
           <ResponsiveContainer>
             <BarChart data={data1}>
               <XAxis
