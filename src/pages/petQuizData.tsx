@@ -66,13 +66,11 @@ export default function PetQuizData() {
         stuCount = 5 - element.stuartRank + stuCount;
         elCount = 5 - element.elGatoRank + elCount;
 
-        console.log(element.sydneyRank.valueOf());
         if (element.sydneyRank.valueOf() == 1) ++sydOneCount;
         if (element.lokiRank.valueOf() == 1) ++lokOneCount;
         if (element.stuartRank.valueOf() == 1) ++stuOneCount;
         if (element.elGatoRank.valueOf() == 1) ++elOneCount;
 
-        console.log(sydOneCount);
       }
     );
     setSydRank(sydCount);
