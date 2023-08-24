@@ -131,7 +131,7 @@ export default function PetQuizData() {
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-  const RADIAN = Math.PI / 180;
+/*   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     number: cx,
     number: cy,
@@ -159,7 +159,7 @@ export default function PetQuizData() {
       </text>
     );
     }
-  };
+  }; */
 
   function resultsButtonClick() {
     setViewMode1(true);
@@ -295,7 +295,7 @@ export default function PetQuizData() {
                   cx="50%"
                   cy="50%"
                   outerRadius={400}
-                 label={renderCustomizedLabel}
+                 //label={renderCustomizedLabel}
                  labelLine={false}
                 >
                   {pieChartData.map((entry, index) => (
