@@ -84,18 +84,19 @@ export default function RootLayout({
           </SimpleGrid>
         </Box>
       </Flex>
-      <SimpleGrid columns={3} spacing={0}>
+      <SimpleGrid columns={4}>
+        <GridItem height={5} ></GridItem>
         <GridItem height={5}></GridItem>
-        <GridItem height={5}></GridItem>
+        <GridItem ></GridItem>
+
         <GridItem height={5} >
           {isOpen && (
-            <Alert status="info">
+            <Alert status="info" maxWidth={"500px"} minWidth={"300px"}>
               <Grid
-              h='70px'
+            
               templateRows='repeat(2, 1fr)'
               templateColumns='repeat(10, 1fr)'
               gap={1}
-             w='500px'
               >
                 <GridItem colSpan={1} rowSpan={2} as="aside">
                   <AlertIcon />
