@@ -143,10 +143,13 @@ export default function PetQuizData() {
     number: index,
   }: PieLabelRenderProps) => {
     if(cx && cy && midAngle && innerRadius && outerRadius && percent && name){
+
     const radius: number = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x: number = cx + radius * Math.cos(-midAngle * RADIAN);
     const y: number = cy + radius * Math.sin(-midAngle * RADIAN);
 
+    const nameString: string = name;
+    const percentNum: number = percent;
     return (
       <text
         x={x}
@@ -155,7 +158,7 @@ export default function PetQuizData() {
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
       >
-        {` ${name} ${(percent * 100).toFixed(0)}% `}
+        {` ${nameString} ${(percentNum * 100).toFixed(0)}% `}
       </text>
     );
     }
