@@ -16,62 +16,52 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import Image from "next/image"
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { api } from "npm/utils/api";
 import { currentUser, useUser } from "@clerk/nextjs";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { answerState, submittedState } from "../states/recoil_state";
 
 export default function PetQuiz() {
-  const [sydCount, setSydCount] = useState(Number);
-  const [lokCount, setLokCount] = useState(Number);
-  const [stuCount, setStuCount] = useState(Number);
-  const [elCount, setElCount] = useState(Number);
-  const [sydText, setSydneyText] = useState(4);
-  const [lokText, setLokiText] = useState(4);
-  const [stuText, setStuText] = useState(4);
-  const [elText, setElText] = useState(4);
+  const [sydCount, setSydCount] = useState(4);
+  const [lokCount, setLokCount] = useState(4);
+  const [stuCount, setStuCount] = useState(4);
+  const [elCount, setElCount] = useState(4);
   const [submitReady, setSubmitReady] = useState(false);
-  const [alertText, setAlertText] = useState<string[]>(["","",""]);
+  const [alertText, setAlertText] = useState<string[]>(["", "", ""]);
 
-const submittedState = atom({
-  key: 'submittedState',
-  default: false
-})
-
-const answerState = atom({
-  key: 'answerState'
-})
- 
-const [isSubmitted, setIsSubmitted] = useRecoilState(submittedState);
-  
-
+  const [isSubmitted, setIsSubmitted] = useRecoilState(submittedState);
+  const [answer, setAnswer] = useRecoilState(answerState);
 
   const router = useRouter();
   const mutation = api.example.post.useMutation();
-  
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<HTMLButtonElement>(null);
   function submitButton() {
     if (
-      sydText == lokText ||
-      sydText == stuText ||
-      sydText == elText ||
-      lokText == stuText ||
-      lokText == elText ||
-      stuText == elText
-    ){
-    setSubmitReady(false);
-    setAlertText(["Please make sure you\'ve given each pet a different ranking",""]);
-    }
-    else{
+      answer.syd == answer.lok ||
+      answer.syd == answer.stu ||
+      answer.syd == answer.el ||
+      answer.lok == answer.stu ||
+      answer.lok == answer.el ||
+      answer.stu == answer.el
+    ) {
+      setSubmitReady(false);
+      setAlertText([
+        "Please make sure you've given each pet a different ranking",
+        "",
+      ]);
+    } else {
       setSubmitReady(true);
-      setAlertText(["Do you want to submit this ranking?", `Sydney: ${sydText}\nLoki: ${lokText}\nStuart: ${stuText}\nEl Gato: ${elText}`]);
+      setAlertText([
+        "Do you want to submit this ranking?",
+        `Sydney: ${answer.syd}\nLoki: ${answer.lok}\nStuart: ${answer.stu}\nEl Gato: ${answer.el}`,
+      ]);
     }
-      onOpen();
+    onOpen();
   }
-
 
   interface UseUserT {
     isLoaded: boolean;
@@ -81,113 +71,167 @@ const [isSubmitted, setIsSubmitted] = useRecoilState(submittedState);
 
   const { isLoaded, isSignedIn, user } = useUser() as UseUserT;
 
-  async function submitPost(){
+  async function submitPost() {
     const userman = user.id;
 
-   mutation.mutate(
-      {
-        sydneyRank: sydText.valueOf(),
-        lokiRank: lokText.valueOf(),
-        stuartRank: stuText.valueOf(),
-        elGatoRank: elText.valueOf(),
-        authorId: userman
-      }
-    )
+    mutation.mutate({
+      sydneyRank: answer.syd,
+      lokiRank: answer.lok,
+      stuartRank: answer.stu,
+      elGatoRank: answer.el,
+      authorId: userman,
+    });
 
     setIsSubmitted(true);
     await router.push("/petQuizData");
-   
   }
   function sydneyClick() {
+    if(!isSubmitted){
     setSydCount(sydCount + 1);
 
-    setSydneyText((sydCount % 4) + 1);
+    setAnswer({
+      syd: (sydCount % 4) + 1,
+      lok: answer.lok,
+      stu: answer.stu,
+      el: answer.el,
+    });
+  }
   }
 
   function lokClick() {
+    if(!isSubmitted){
     setLokCount(lokCount + 1);
 
-    setLokiText((lokCount % 4) + 1);
+    setAnswer({
+      syd: answer.syd,
+      lok: (lokCount % 4) + 1,
+      stu: answer.stu,
+      el: answer.el,
+    });
+  }
+  }
+
+  function columns(){
+    if (submitReady)
+      return 2;
+    else
+      return 1;
   }
 
   function stuClick() {
+    if(!isSubmitted){
     setStuCount(stuCount + 1);
 
-    setStuText((stuCount % 4) + 1);
+    setAnswer({
+      syd: answer.syd,
+      lok: answer.lok,
+      stu: (stuCount % 4) +1,
+      el: answer.el,
+    });
+  }
   }
 
   function elClick() {
+    if(!isSubmitted){
     setElCount(elCount + 1);
 
-    setElText((elCount % 4) + 1);
+    setAnswer({
+      syd: answer.syd,
+      lok: answer.lok,
+      stu: answer.stu,
+      el: (elCount % 4) + 1,
+    });
+  }
   }
   return (
     <Container minWidth={"90vw"}>
       <Center paddingBottom={"10px"} paddingTop={"20px"}>
-      <Text fontSize={"4xl"} as={"b"}>Which pet is the cutest?</Text>
+        <Text fontSize={"4xl"} as={"b"}>
+          Which pet is the cutest?
+        </Text>
       </Center>
-      <Center paddingBottom={"15px"}>
-      <Text fontSize={"2xl"} textColor={"gray"}>Click on the images below to rank these pets.</Text>
-      </Center>
+     {!isSubmitted && <Center paddingBottom={"15px"}>
+        <Text fontSize={"2xl"} textColor={"gray"}>
+          Click on the images below to rank these pets.
+        </Text>
+      </Center>}
       <Center>
-        
         <SimpleGrid columns={2} spacing={10}>
           <GridItem rowSpan={1}>
             <button onClick={() => sydneyClick()}>
-              <Image src="/sydney.png" width={150} height={80} alt = "Sydney"></Image>
+              <Image
+                src="/sydney.png"
+                width={150}
+                height={80}
+                alt="Sydney"
+              ></Image>
             </button>
-            <Text>Sydney: {sydText}</Text>
+            <Text>Sydney: {answer.syd}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => lokClick()}>
-              <Image src="/loki.png" width={150} height={80} alt = "Loki"></Image>
+              <Image src="/loki.png" width={150} height={80} alt="Loki"></Image>
             </button>
-            <Text>Loki: {lokText}</Text>
+            <Text>Loki: {answer.lok}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => stuClick()}>
-              <Image src="/stuart.png" width={150} height={80} alt = "Stuart"></Image>
+              <Image
+                src="/stuart.png"
+                width={150}
+                height={80}
+                alt="Stuart"
+              ></Image>
             </button>
-            <Text>Stuart: {stuText}</Text>
+            <Text>Stuart: {answer.stu}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => elClick()}>
-              <Image src="/gato.png" width={150} height={80} alt = "El Gato"></Image>
+              <Image
+                src="/gato.png"
+                width={150}
+                height={80}
+                alt="El Gato"
+              ></Image>
             </button>
-            <Text>El Gato {elText}</Text>
+            <Text>El Gato {answer.el}</Text>
           </GridItem>
-          <GridItem colSpan={2}>
-    
-          </GridItem>
+          <GridItem colSpan={2}></GridItem>
         </SimpleGrid>
       </Center>
       <Center>
         {!isSubmitted && <Button onClick={submitButton}>Submit!</Button>}
-        {!!isSubmitted && <Button onClick={() => router.push("petQuizData")}>View Results!</Button>}
+        {!!isSubmitted && (
+          <Button onClick={() => router.push("petQuizData")}>
+            View Results!
+          </Button>
+        )}
       </Center>
       <AlertDialog
-          isOpen={isOpen}
-          leastDestructiveRef={cancelRef}
-          onClose={onClose}
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            <Text>{alertText[0]}</Text>
+              <Text>{alertText[0]}</Text>
             </AlertDialogHeader>
 
             <AlertDialogBody>
-             <Text>{alertText[1]}</Text>
+              <Text>{alertText[1]}</Text>
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <SimpleGrid columns={2} spacing={5}>
-              <Button ref={cancelRef} onClick={onClose}>
-                Change my answer!
-              </Button>
-              {submitReady && <Button colorScheme="telegram" onClick={submitPost}>
-                Submit!
-              </Button>}
+              <SimpleGrid columns={columns()} spacing={5}>
+                <Button ref={cancelRef} onClick={onClose}>
+                  Change my answer!
+                </Button>
+                {submitReady && (
+                  <Button colorScheme="telegram" onClick={submitPost}>
+                    Submit!
+                  </Button>
+                )}
               </SimpleGrid>
             </AlertDialogFooter>
           </AlertDialogContent>

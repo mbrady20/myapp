@@ -14,15 +14,21 @@ import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Head from "next/head";
 
 import { useRouter } from "next/router";
+import { submittedState } from "npm/states/recoil_state";
+import { useRecoilState } from "recoil";
 
 export default function Home() {
   const user = useUser();
   const router = useRouter();
+
+  const [isSubmitted, setIsSubmitted] = useRecoilState(submittedState);
+
+  
   return (
 
 
       <Container>
-        <Container paddingY="50px">
+        <Container paddingTop="10px" paddingBottom={"30px"}>
           <Center>
             <Image src="me.png" width={120} height={120} borderRadius={"50%"} alt="Michael Brady"/>
           </Center>
@@ -48,13 +54,16 @@ export default function Home() {
             </Center>
             <Container >
             <Center paddingTop={"25px"}>
-              <Text>Sign in to view the Pet Quiz!</Text>
+             {!user.isSignedIn && <Text>Sign in to take the Pet Quiz!</Text> }
+             {user.isSignedIn && !isSubmitted && <Text>Take the Pet Quiz! or sign out if you want...</Text>}
+             {user.isSignedIn && isSubmitted && <Text>Sure you don't want to take another look at your results?</Text>}
               </Center>
               <Center paddingTop={"20px"}>
-            <div>
+              {user.isSignedIn && !isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizPage")}>Pet Quiz!</Button>}
+              {user.isSignedIn && isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizData")}>View Pet Quiz Results</Button>}
               {!user.isSignedIn && <SignInButton><Button colorScheme={"telegram"}>Sign in!</Button></SignInButton>}
               {!!user.isSignedIn && <SignOutButton><Button colorScheme={"telegram"}>Sign out?</Button></SignOutButton>}
-            </div>
+
             </Center>
             </Container>
           </Container>
