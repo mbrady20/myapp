@@ -9,7 +9,9 @@ import {
   GridItem,
   Icon,
   Text,
+  TooltipProps,
 } from "@chakra-ui/react";
+import { LabelItem, PieController, PieControllerChartOptions, PieDataPoint } from "chart.js";
 import { AnyObject } from "chart.js/dist/types/basic";
 import router from "next/router";
 import { api } from "npm/utils/api";
@@ -19,8 +21,12 @@ import {
   Bar,
   BarChart,
   Cell,
+  LabelListProps,
+  LabelProps,
   Pie,
   PieChart,
+  PieLabel,
+  PieLabelRenderProps,
   ResponsiveContainer,
   XAxis,
   YAxis,
@@ -127,15 +133,16 @@ export default function PetQuizData() {
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
-    cx,
-    cy,
+    number: cx,
+    number: cy,
     midAngle,
-    innerRadius,
-    outerRadius,
+    number: innerRadius,
+    number: outerRadius,
     percent,
     name,
     index,
-  }: AnyObject) => {
+  }: PieLabelRenderProps) => {
+    if(cx && cy && midAngle && innerRadius && outerRadius && percent && name){
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -151,6 +158,7 @@ export default function PetQuizData() {
         {` ${name} ${(percent * 100).toFixed(0)}% `}
       </text>
     );
+    }
   };
 
   function resultsButtonClick() {
