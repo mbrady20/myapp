@@ -64,8 +64,12 @@ export default function PetQuizData() {
         templateColumns="repeat(10, 1fr)"
         gap={0}
       >
-        <GridItem colSpan={1} height={"100vh"} bg="blue.100"></GridItem>
-        <GridItem colSpan={9} height={"80vh"}>
+        <GridItem colSpan={1} height={"100vh"} bg="blue.100">
+            <Button >
+
+            </Button>
+        </GridItem>
+        <GridItem colSpan={9} height={"80vh"} bg="green.50" paddingTop={"25px"}>
           <ResponsiveContainer>
             <BarChart data={data1}>
               <XAxis
@@ -82,7 +86,7 @@ export default function PetQuizData() {
                 axisLine={false}
                 tickFormatter={(value) => `%${value}`}
               />
-              <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="total" fill="#528aae" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </GridItem>
