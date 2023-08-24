@@ -132,24 +132,16 @@ export default function PetQuizData() {
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
   
   const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    number: cx,
-    number: cy,
-    number: midAngle,
-    number: innerRadius,
-    number: outerRadius,
-    number: percent,
-    string: name,
-    number: index,
-  }: PieLabelRenderProps) => {
-    if(cx && cy && midAngle && innerRadius && outerRadius && percent && name){
-
+  const renderCustomizedLabel = (object: PieLabelRenderProps) => {
+    if(object.cx && object.cy && object.midAngle && object.innerRadius && object.outerRadius && object.percent && object.name){
+        const innerRadius = +object.innerRadius;
+        const outerRadius= +object.outerRadius;
+        const cx = +object.cx;
+        const cy = +object.cy
     const radius: number = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x: number = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y: number = cy + radius * Math.sin(-midAngle * RADIAN);
+    const x: number = cx + radius * Math.cos(-object.midAngle * RADIAN);
+    const y: number = cy + radius * Math.sin(-object.midAngle * RADIAN);
 
-    const nameString: string = name;
-    const percentNum: number = percent;
     return (
       <text
         x={x}
@@ -158,7 +150,7 @@ export default function PetQuizData() {
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
       >
-        {` ${nameString} ${(percentNum * 100).toFixed(0)}% `}
+        {` ${object.name} ${(object.percent * 100).toFixed(0)}% `}
       </text>
     );
     }
