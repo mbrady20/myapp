@@ -1,23 +1,55 @@
 "use client";
-import { Button, Card, Container, Grid, GridItem, Text} from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Card,
+  Center,
+  Container,
+  Grid,
+  GridItem,
+  Icon,
+  Text,
+} from "@chakra-ui/react";
 import router from "next/router";
 import { api } from "npm/utils/api";
 import { useEffect, useState } from "react";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { AiFillHome } from "react-icons/ai";
+import {
+  Bar,
+  BarChart,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 export default function PetQuizData() {
   const { data } = api.example.getAll.useQuery();
+
+  const [viewMode1, setViewMode1] = useState(true);
+  const [viewMode2, setViewMode2] = useState(true);
+
   const [sydRank, setSydRank] = useState(0);
   const [lokRank, setLokRank] = useState(0);
   const [stuRank, setStuRank] = useState(0);
   const [elRank, setElRank] = useState(0);
-  const [totRank, setTotRank] = useState(0);
+  const [sydRankOne, setSydRankOne] = useState(0);
+  const [lokRankOne, setLokRankOne] = useState(0);
+  const [stuRankOne, setStuRankOne] = useState(0);
+  const [elRankOne, setElRankOne] = useState(0);
+  const [totCount, setTotCount] = useState(0);
+
   let sydCount = 0;
   let lokCount = 0;
   let stuCount = 0;
   let elCount = 0;
   let count = 0;
 
+  let sydOneCount = 0;
+  let lokOneCount = 0;
+  let stuOneCount = 0;
+  let elOneCount = 0;
   useEffect(() => {
     data?.forEach(
       (element: {
@@ -26,75 +58,198 @@ export default function PetQuizData() {
         stuartRank: number;
         elGatoRank: number;
       }) => {
-        count = count + 4;
+        count = count + 1;
         sydCount = 5 - element.sydneyRank + sydCount;
         lokCount = 5 - element.lokiRank + lokCount;
         stuCount = 5 - element.stuartRank + stuCount;
         elCount = 5 - element.elGatoRank + elCount;
+
+        if (element.sydneyRank == 1) ++sydOneCount;
+        if (element.lokiRank == 1) ++lokOneCount;
+        if (element.stuartRank == 1) ++stuOneCount;
+        if (element.elGatoRank == 1) ++elOneCount;
       }
     );
     setSydRank(sydCount);
     setLokRank(lokCount);
     setStuRank(stuCount);
     setElRank(elCount);
-    setTotRank(count);
+    setSydRankOne(sydOneCount);
+    setLokRankOne(lokOneCount);
+    setStuRankOne(stuOneCount);
+    setElRankOne(elOneCount);
+    setTotCount(count);
+
+
   }, [data]);
 
-  const data1 = [
+  const barChartData = [
     {
       name: "Sydney",
-      total: (sydRank / totRank) * 100,
+      total: (sydRank / (totCount * 4)) * 100,
     },
     {
       name: "Loki",
-      total: (lokRank / totRank) * 100,
+      total: (lokRank / (totCount * 4)) * 100,
     },
     {
       name: "Stuart",
-      total: (stuRank / totRank) * 100,
+      total: (stuRank / (totCount * 4)) * 100,
     },
     {
       name: "El Gato",
-      total: (elRank / totRank) * 100,
+      total: (elRank / (totCount * 4)) * 100,
     },
   ];
 
+  const pieChartData = [
+    {
+        name: "Sydney",
+        total: (sydOneCount / totCount),
+    },
+    {
+        name: "Loki",
+        total: (lokOneCount / totCount),
+    },
+    {
+        name: "Stuart",
+        total: (stuOneCount / totCount),
+    },
+    {
+        name: "El Gato",
+        total: (elOneCount / totCount)
+    }
+  ]
+  function resultsButtonClick() {
+    setViewMode1(true);
+    setViewMode2(true);
+  }
+
+  function barButtonClick() {
+    setViewMode1(true);
+    setViewMode2(false);
+  }
+
+  function pieButtonClick() {
+    setViewMode1(false);
+    setViewMode2(true);
+  }
+
+  function lineButtonClick() {
+    setViewMode1(false);
+    setViewMode2(false);
+  }
+
   return (
-      <Grid
-        templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(10, 1fr)"
-        gap={0}
-      >
-        <GridItem colSpan={1} height={"100vh"} bg="blue.100">
-            <Button onClick={() => router.push("/")
-            }>
-                Home Page
+    <Grid
+      templateRows="repeat(1, 1fr)"
+      templateColumns="repeat(10, 1fr)"
+      gap={0}
+    >
+      <GridItem colSpan={1} height={"100vh"} bg="blue.100">
+        <Container>
+          <Box>
+            <Button
+              onClick={() => router.push("/")}
+              width={"100%"}
+              variant={"twitter"}
+            >
+              <Icon as={AiFillHome}></Icon>
             </Button>
-        </GridItem>
-        <GridItem colSpan={9} height={"80vh"} bg="green.50" >
-            <Text height={"20"}>
-                Percentage of vote share for each pet
+          </Box>
+          <Box paddingY={"50px"}>
+            <Button
+              width={"100%"}
+              bg="green.100"
+              borderRadius="50px"
+              _hover={{ bg: "green.200" }}
+              onClick={resultsButtonClick}
+            >
+              My Results
+            </Button>
+          </Box>
+          <Box paddingY={"50px"}>
+            <Button
+              width={"100%"}
+              onClick={barButtonClick}
+              bg="red.100"
+              borderRadius="50px"
+              _hover={{ bg: "red.200" }}
+            >
+              Bar Chart View
+            </Button>
+          </Box>
+          <Box paddingY={"50px"}>
+            <Button
+              width={"100%"}
+              bg="yellow.100"
+              borderRadius={"50px"}
+              _hover={{ bg: "yellow.200" }}
+              onClick={pieButtonClick}
+            >
+              Pie Chart View
+            </Button>
+          </Box>
+          <Box paddingY={"50px"}>
+            <Button
+              width={"100%"}
+              bg="purple.100"
+              borderRadius={"50px"}
+              _hover={{ bg: "purple.200" }}
+              onClick={lineButtonClick}
+            >
+              Line Graph View
+            </Button>
+          </Box>
+        </Container>
+      </GridItem>
+      {viewMode1 && viewMode2 && (
+        <GridItem colSpan={9} height={"100vh"} bg="green.50"></GridItem>
+      )}
+      {viewMode1 && !viewMode2 && (
+        <GridItem colSpan={9} height={"100vh"} bg="red.50">
+          <Center>
+            <Text height={"10vh"} paddingTop={"10px"} as="b" fontSize={"3xl"}>
+              Percentage of vote share for each pet
             </Text>
+          </Center>
+          <Container height={"90vh"} minWidth={"90vw"}>
+            <ResponsiveContainer>
+              <BarChart data={barChartData}>
+                <XAxis
+                  dataKey="name"
+                  stroke="#00000"
+                  fontSize={20}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <YAxis
+                  stroke="#00000"
+                  fontSize={14}
+                  tickLine={false}
+                  axisLine={false}
+                  tickFormatter={(value) => `%${value}`}
+                />
+                <Bar dataKey="total" fill="#528aae" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </Container>
+        </GridItem>
+      )}
+
+      {!viewMode1 && viewMode2 && (
+        <GridItem colSpan={9} height={"100vh"} bg="yellow.50">
           <ResponsiveContainer>
-            <BarChart data={data1}>
-              <XAxis
-                dataKey="name"
-                stroke="#888888"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-              />
-              <YAxis
-                stroke="#888888"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(value) => `%${value}`}
-              />
-              <Bar dataKey="total" fill="#528aae" radius={[4, 4, 0, 0]} />
-            </BarChart>
+            <PieChart width={740} height={500}>
+                <Pie data={pieChartData} dataKey={"hello"}/>
+            </PieChart>
           </ResponsiveContainer>
         </GridItem>
-      </Grid>
+      )}
+
+      {!viewMode1 && !viewMode2 && (
+        <GridItem colSpan={9} height={"100vh"} bg="purple.50"></GridItem>
+      )}
+    </Grid>
   );
 }
