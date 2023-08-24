@@ -17,12 +17,14 @@ import { AiFillHome } from "react-icons/ai";
 import {
   Bar,
   BarChart,
+  Cell,
   Pie,
   PieChart,
   ResponsiveContainer,
   XAxis,
   YAxis,
 } from "recharts";
+import { Props } from "recharts/types/container/Surface";
 
 export default function PetQuizData() {
   const { data } = api.example.getAll.useQuery();
@@ -64,11 +66,13 @@ export default function PetQuizData() {
         stuCount = 5 - element.stuartRank + stuCount;
         elCount = 5 - element.elGatoRank + elCount;
 
-        if (element.sydneyRank == 1) ++sydOneCount;
-        if (element.lokiRank == 1) ++lokOneCount;
-        if (element.stuartRank == 1) ++stuOneCount;
-        if (element.elGatoRank == 1) ++elOneCount;
+        console.log(element.sydneyRank.valueOf());
+        if (element.sydneyRank.valueOf() == 1) ++sydOneCount;
+        if (element.lokiRank.valueOf() == 1) ++lokOneCount;
+        if (element.stuartRank.valueOf() == 1) ++stuOneCount;
+        if (element.elGatoRank.valueOf() == 1) ++elOneCount;
 
+        console.log(sydOneCount);
       }
     );
     setSydRank(sydCount);
@@ -104,21 +108,52 @@ export default function PetQuizData() {
   const pieChartData = [
     {
       name: "Sydney",
-      value: (sydOneCount / totCount) * 100,
+      value: (sydRankOne / totCount) * 100,
     },
     {
       name: "Loki",
-      value: (lokOneCount / totCount) * 100,
+      value: (lokRankOne / totCount) * 100,
     },
     {
       name: "Stuart",
-      value: (stuOneCount / totCount) * 100,
+      value: (stuRankOne / totCount) * 100,
     },
     {
       name: "El Gato",
-      value: (elOneCount / totCount) * 100,
+      value: (elRankOne / totCount) * 100,
     },
   ];
+
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    name,
+    index,
+  }: any) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {` ${name} ${(percent * 100).toFixed(0)}% `}
+      </text>
+    );
+  };
+
   function resultsButtonClick() {
     setViewMode1(true);
     setViewMode2(true);
@@ -130,6 +165,7 @@ export default function PetQuizData() {
   }
 
   function pieButtonClick() {
+    console.log(pieChartData);
     setViewMode1(false);
     setViewMode2(true);
   }
@@ -197,7 +233,7 @@ export default function PetQuizData() {
               _hover={{ bg: "purple.200" }}
               onClick={lineButtonClick}
             >
-              Line Graph View
+              Recent Responses
             </Button>
           </Box>
         </Container>
@@ -244,12 +280,26 @@ export default function PetQuizData() {
             </Text>
           </Center>
           <Container height={"90vh"} minWidth={"90vw"}>
-          <ResponsiveContainer width="100%" height="100%">
-        <PieChart width={400} height={400}>
-          <Pie data={pieChartData} dataKey="value" cx="50%" cy="50%" outerRadius={60} fill="#8884d8" />
-          <Pie data={pieChartData} dataKey="value" cx="50%" cy="50%" innerRadius={70} outerRadius={90} fill="#82ca9d" label />
-        </PieChart>
-      </ResponsiveContainer>
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart width={400} height={400}>
+                <Pie
+                  data={pieChartData}
+                  dataKey="value"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={400}
+                 label={renderCustomizedLabel}
+                 labelLine={false}
+                >
+                  {pieChartData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
           </Container>
         </GridItem>
       )}
