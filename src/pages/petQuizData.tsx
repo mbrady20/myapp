@@ -132,28 +132,26 @@ export default function PetQuizData() {
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
   
   const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = (object: PieLabelRenderProps) => {
-    if(object.cx && object.cy && object.midAngle && object.innerRadius && object.outerRadius && object.percent && object.name){
-        const innerRadius = +object.innerRadius;
-        const outerRadius= +object.outerRadius;
-        const cx = +object.cx;
-        const cy = +object.cy
-    const radius: number = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x: number = cx + radius * Math.cos(-object.midAngle * RADIAN);
-    const y: number = cy + radius * Math.sin(-object.midAngle * RADIAN);
+  const renderCustomizedLabel = (props: {
+     cx: number, cy: number, midAngle: number, innerRadius: number, outerRadius: number, percent: number, index: number, name: string 
+  }) => {
+
+    const radius: number = props.innerRadius + (props.outerRadius - props.innerRadius) * 0.5;
+    const x: number = props.cx + radius * Math.cos(-props.midAngle * RADIAN);
+    const y: number = props.cy + radius * Math.sin(-props.midAngle * RADIAN);
 
     return (
       <text
         x={x}
         y={y}
         fill="white"
-        textAnchor={x > cx ? "start" : "end"}
+        textAnchor={x > props.cx ? "start" : "end"}
         dominantBaseline="central"
       >
-        {` ${object.name} ${(object.percent * 100).toFixed(0)}% `}
+        {` ${props.name} ${(props.percent * 100).toFixed(0)}% `}
       </text>
     );
-    }
+    
   }; 
 
   function resultsButtonClick() {
