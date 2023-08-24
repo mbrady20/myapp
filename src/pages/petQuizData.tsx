@@ -133,14 +133,14 @@ export default function PetQuizData() {
   
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
-     cx,
-     cy,
-    midAngle,
-    innerRadius,
-     outerRadius,
-     percent,
-     name,
-     index,
+    number: cx,
+    number: cy,
+    number: midAngle,
+    number: innerRadius,
+    number: outerRadius,
+    number: percent,
+    string: name,
+    number: index,
   }: PieLabelRenderProps) => {
     if(cx && cy && midAngle && innerRadius && outerRadius && percent && name){
     const radius: number = innerRadius + (outerRadius - innerRadius) * 0.5;
