@@ -51,12 +51,12 @@ export default function PetQuiz() {
   const cancelRef = useRef<HTMLButtonElement>(null);
   function submitButton() {
     if (
-      answer.syd == answer.lok ||
-      answer.syd == answer.stu ||
-      answer.syd == answer.el ||
-      answer.lok == answer.stu ||
-      answer.lok == answer.el ||
-      answer.stu == answer.el
+      sydTextRef.current == lokTextRef.current ||
+      sydTextRef.current == stuTextRef.current ||
+      sydTextRef.current == elTextRef.current ||
+      lokTextRef.current == stuTextRef.current ||
+      lokTextRef.current == elTextRef.current ||
+      stuTextRef.current == elTextRef.current
     ) {
       setSubmitReady(false);
       setAlertText([
