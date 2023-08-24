@@ -59,7 +59,6 @@ export default function PetQuizData() {
   ];
 
   return (
-    <Container bg="blue.50" minWidth={"100vw"} minHeight={"100vh"}>
       <Grid
         templateRows="repeat(2, 1fr)"
         templateColumns="repeat(10, 1fr)"
@@ -88,6 +87,5 @@ export default function PetQuizData() {
           </ResponsiveContainer>
         </GridItem>
       </Grid>
-    </Container>
   );
 }
