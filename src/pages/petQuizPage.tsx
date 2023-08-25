@@ -54,7 +54,6 @@ export default function PetQuiz() {
   const cancelRef = useRef<HTMLButtonElement>(null);
 
   const [input, setInput] = useState('');
-  const handleInputChange = (e: any) => setInput(e.target.value);
 
 
   function submitButton() {
@@ -233,7 +232,7 @@ export default function PetQuiz() {
               {!!submitReady && <FormControl>
                 <FormLabel>
                   Please Enter Your Initials!</FormLabel>
-                  <Input placeholder='JMS' value={input} onChange={handleInputChange}>
+                  <Input placeholder='JMS' value={input} onChange={(e) => setInput(e.target.value)}>
                   </Input></FormControl>}
             </AlertDialogBody>
 
