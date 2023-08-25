@@ -344,7 +344,7 @@ export default function PetQuizData() {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {data2 && data2.map((element) => 
+                        {data2?.map((element) => 
                         <Tr key={element.id}>
                             <Td>
                                 {element.initials}
