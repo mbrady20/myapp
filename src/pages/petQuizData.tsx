@@ -11,7 +11,12 @@ import {
   Text,
   TooltipProps,
 } from "@chakra-ui/react";
-import { LabelItem, PieController, PieControllerChartOptions, PieDataPoint } from "chart.js";
+import {
+  LabelItem,
+  PieController,
+  PieControllerChartOptions,
+  PieDataPoint,
+} from "chart.js";
 import { AnyObject } from "chart.js/dist/types/basic";
 import router from "next/router";
 import { api } from "npm/utils/api";
@@ -34,6 +39,8 @@ import {
 import { Props } from "recharts/types/container/Surface";
 
 export default function PetQuizData() {
+  const data2 = api.example.getTen.useQuery();
+
   const { data } = api.example.getAll.useQuery();
 
   const [viewMode1, setViewMode1] = useState(true);
@@ -77,7 +84,6 @@ export default function PetQuizData() {
         if (element.lokiRank.valueOf() == 1) ++lokOneCount;
         if (element.stuartRank.valueOf() == 1) ++stuOneCount;
         if (element.elGatoRank.valueOf() == 1) ++elOneCount;
-
       }
     );
     setSydRank(sydCount);
@@ -130,13 +136,20 @@ export default function PetQuizData() {
   ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-  
+
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = (props: {
-     cx: number, cy: number, midAngle: number, innerRadius: number, outerRadius: number, percent: number, index: number, name: string 
+    cx: number;
+    cy: number;
+    midAngle: number;
+    innerRadius: number;
+    outerRadius: number;
+    percent: number;
+    index: number;
+    name: string;
   }) => {
-
-    const radius: number = props.innerRadius + (props.outerRadius - props.innerRadius) * 0.5;
+    const radius: number =
+      props.innerRadius + (props.outerRadius - props.innerRadius) * 0.5;
     const x: number = props.cx + radius * Math.cos(-props.midAngle * RADIAN);
     const y: number = props.cy + radius * Math.sin(-props.midAngle * RADIAN);
 
@@ -151,8 +164,7 @@ export default function PetQuizData() {
         {` ${props.name} ${(props.percent * 100).toFixed(0)}% `}
       </text>
     );
-    
-  }; 
+  };
 
   function resultsButtonClick() {
     setViewMode1(true);
@@ -248,7 +260,7 @@ export default function PetQuizData() {
               Percentage of vote share for each pet
             </Text>
           </Center>
-          <Container height={"90vh"} minWidth={"90vw"}>
+          <Container height={"90vh"} minWidth={"80vw"} >
             <ResponsiveContainer>
               <BarChart data={barChartData}>
                 <XAxis
@@ -287,9 +299,9 @@ export default function PetQuizData() {
                   dataKey="value"
                   cx="50%"
                   cy="50%"
-                  outerRadius={400}
-                 label={renderCustomizedLabel}
-                 labelLine={false}
+                  outerRadius={350}
+                  label={renderCustomizedLabel}
+                  labelLine={false}
                 >
                   {pieChartData.map((entry, index) => (
                     <Cell

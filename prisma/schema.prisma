@@ -19,6 +19,7 @@ model Rank {
 
   authorId String
 
+  initials String @db.VarChar(3)
   sydneyRank Int
   lokiRank   Int
   stuartRank Int

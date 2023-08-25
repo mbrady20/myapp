@@ -9,7 +9,10 @@ import {
   Center,
   Container,
   Flex,
+  FormControl,
+  FormLabel,
   GridItem,
+  Input,
   SimpleGrid,
   Text,
   useDisclosure,
@@ -49,6 +52,11 @@ export default function PetQuiz() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<HTMLButtonElement>(null);
+
+  const [input, setInput] = useState('');
+  const handleInputChange = (e: any) => setInput(e.target.value);
+
+
   function submitButton() {
     if (
       sydTextRef.current == lokTextRef.current ||
@@ -96,6 +104,7 @@ export default function PetQuiz() {
       stuartRank: answer.stu,
       elGatoRank: answer.el,
       authorId: userman,
+      initials: input,
     });
 
     setIsSubmitted(true);
@@ -161,7 +170,7 @@ export default function PetQuiz() {
           <GridItem rowSpan={1}>
             <button onClick={() => sydneyClick()}>
               <Image
-                src="/sydney.png"
+                src="/sydney2.png"
                 width={150}
                 height={80}
                 alt="Sydney"
@@ -171,7 +180,7 @@ export default function PetQuiz() {
           </GridItem>
           <GridItem>
             <button onClick={() => lokClick()}>
-              <Image src="/loki.png" width={150} height={80} alt="Loki"></Image>
+              <Image src="/loki.jpeg" width={150} height={80} alt="Loki"></Image>
             </button>
             <Text>Loki: {lokTextRef.current}</Text>
           </GridItem>
@@ -189,7 +198,7 @@ export default function PetQuiz() {
           <GridItem>
             <button onClick={() => elClick()}>
               <Image
-                src="/gato.png"
+                src="/elgato.png"
                 width={150}
                 height={80}
                 alt="El Gato"
@@ -221,6 +230,11 @@ export default function PetQuiz() {
 
             <AlertDialogBody>
               <Text>{alertText[1]}</Text>
+              {!!submitReady && <FormControl>
+                <FormLabel>
+                  Please Enter Your Initials!</FormLabel>
+                  <Input placeholder='JMS' value={input} onChange={handleInputChange}>
+                  </Input></FormControl>}
             </AlertDialogBody>
 
             <AlertDialogFooter>

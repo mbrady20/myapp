@@ -19,6 +19,7 @@ export const exampleRouter = createTRPCRouter({
       stuartRank: z.number(),
       elGatoRank: z.number(),
       authorId: z.string(),
+      initials: z.string(),
     })
   ).mutation (async({input, ctx}) => {
       const post = await ctx.prisma.rank.create({
@@ -32,7 +33,17 @@ export const exampleRouter = createTRPCRouter({
       });
 
       return post
-  })
+  }),
+
+  getTen: publicProcedure.query(async ({ctx}) => {
+    return await ctx.prisma.rank.findMany({
+      take: 10,
+      orderBy: {
+        id: 'desc'
+      }
+    });
+  }),
+
 })
 
 
