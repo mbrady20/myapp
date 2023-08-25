@@ -74,7 +74,7 @@ export default function PetQuiz() {
       setSubmitReady(true);
       setAlertText([
         "Do you want to submit this ranking?",
-        `Sydney: ${answer.syd}\nLoki: ${answer.lok}\nStuart: ${answer.stu}\nEl Gato: ${answer.el}`,
+        `Sydney: ${sydTextRef.current}\nLoki: ${lokTextRef.current}\nStuart: ${stuTextRef.current}\nEl Gato: ${elTextRef.current}`,
       ]);
     }
     onOpen();
