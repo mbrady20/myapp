@@ -97,6 +97,8 @@ export default function PetQuiz() {
       stu: stuTextRef.current,
       el: elTextRef.current
     })
+    console.log(answer)
+    console.log(sydTextRef.current);
     mutation.mutate({
       sydneyRank: answer.syd,
       lokiRank: answer.lok,
