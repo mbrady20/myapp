@@ -155,32 +155,28 @@ export default function PetQuiz() {
     if(isSubmitted)
       return answer.syd;
     else
-      return
-        sydTextRef.current;
+      return sydTextRef.current;
   }
 
   function lokImageCaptionNumber(){
     if(isSubmitted)
       return answer.lok;
     else
-      return
-        lokTextRef.current;
+      return lokTextRef.current;
   }
 
   function stuImageCaptionNumber(){
     if(isSubmitted)
       return answer.stu;
     else
-      return
-        stuTextRef.current;
+      return stuTextRef.current;
   }
 
   function elImageCaptionNumber(){
     if(isSubmitted)
       return answer.el;
     else
-      return
-        elTextRef.current;
+      return elTextRef.current;
   }
   return (
     <Container minWidth={"90vw"}>
