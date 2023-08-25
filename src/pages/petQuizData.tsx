@@ -301,7 +301,7 @@ export default function PetQuizData() {
               Percentage of voters who voted each pet the cutest
             </Text>
           </Center>
-          <Container height={"90vh"} minWidth={"90vw"}>
+          <Container height={"90vh"} minWidth={"80vw"} >
             <ResponsiveContainer width="100%" height="100%">
               <PieChart width={400} height={400}>
                 <Pie
