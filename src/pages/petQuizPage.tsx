@@ -90,20 +90,13 @@ export default function PetQuiz() {
 
   async function submitPost() {
     const userman = user.id;
-
-    setAnswer({
-      syd: sydTextRef.current,
-      lok: lokTextRef.current,
-      stu: stuTextRef.current,
-      el: elTextRef.current
-    })
     console.log(answer)
     console.log(sydTextRef.current);
     mutation.mutate({
-      sydneyRank: answer.syd,
-      lokiRank: answer.lok,
-      stuartRank: answer.stu,
-      elGatoRank: answer.el,
+      sydneyRank: sydTextRef.current,
+      lokiRank: lokTextRef.current,
+      stuartRank: stuTextRef.current,
+      elGatoRank: elTextRef.current,
       authorId: userman,
       initials: input,
     });
