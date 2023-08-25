@@ -5,11 +5,20 @@ import {
   Card,
   Center,
   Container,
+  Divider,
   Grid,
   GridItem,
   Icon,
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Td,
   Text,
+  Th,
+  Thead,
   TooltipProps,
+  Tr,
 } from "@chakra-ui/react";
 import {
   LabelItem,
@@ -39,7 +48,7 @@ import {
 import { Props } from "recharts/types/container/Surface";
 
 export default function PetQuizData() {
-  const data2 = api.example.getTen.useQuery();
+  const data2 = api.example.getTen.useQuery().data;
 
   const { data } = api.example.getAll.useQuery();
 
@@ -182,9 +191,10 @@ export default function PetQuizData() {
     setViewMode2(true);
   }
 
-  function lineButtonClick() {
+  function recentButtonClick() {
     setViewMode1(false);
     setViewMode2(false);
+    console.log(data2);
   }
 
   return (
@@ -243,7 +253,7 @@ export default function PetQuizData() {
               bg="purple.100"
               borderRadius={"50px"}
               _hover={{ bg: "purple.200" }}
-              onClick={lineButtonClick}
+              onClick={recentButtonClick}
             >
               Recent Responses
             </Button>
@@ -317,7 +327,46 @@ export default function PetQuizData() {
       )}
 
       {!viewMode1 && !viewMode2 && (
-        <GridItem colSpan={9} height={"100vh"} bg="purple.50"></GridItem>
+        <GridItem colSpan={9} height={"100vh"} bg="purple.50">
+            <TableContainer>
+                <Table variant = 'simple'>
+                    <TableCaption>
+                        Ten most recent Pet Quiz results
+                    </TableCaption>
+
+                    <Thead>
+                        <Tr>
+                            <Th>Initials</Th>
+                            <Th>Sydney Rank</Th>
+                            <Th>Loki Rank</Th>
+                            <Th>Stuart Rank</Th>
+                            <Th>El Gato Rank</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        {data2 && data2.map((element) => 
+                        <Tr key={element.id}>
+                            <Td>
+                                {element.initials}
+                            </Td>
+                            <Td>
+                                {element.sydneyRank}
+                            </Td>
+                            <Td>
+                                {element.lokiRank}
+                            </Td>
+                            <Td>
+                                {element.stuartRank}
+                            </Td>
+                            <Td>
+                                {element.elGatoRank}
+                            </Td>
+                        </Tr>)}
+                    </Tbody>
+                </Table>
+            </TableContainer>
+
+        </GridItem>
       )}
     </Grid>
   );
