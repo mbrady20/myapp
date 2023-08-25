@@ -28,6 +28,7 @@ import {
 } from "chart.js";
 import { AnyObject } from "chart.js/dist/types/basic";
 import router from "next/router";
+import { answerState } from "npm/states/recoil_state";
 import { api } from "npm/utils/api";
 import { useEffect, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
@@ -46,6 +47,7 @@ import {
   YAxis,
 } from "recharts";
 import { Props } from "recharts/types/container/Surface";
+import { useRecoilState } from "recoil";
 
 export default function PetQuizData() {
   const data2 = api.example.getTen.useQuery().data;
@@ -64,6 +66,8 @@ export default function PetQuizData() {
   const [stuRankOne, setStuRankOne] = useState(0);
   const [elRankOne, setElRankOne] = useState(0);
   const [totCount, setTotCount] = useState(0);
+
+  const [answer, setAnswer] = useRecoilState(answerState);
 
   let sydCount = 0;
   let lokCount = 0;
@@ -162,6 +166,7 @@ export default function PetQuizData() {
     const x: number = props.cx + radius * Math.cos(-props.midAngle * RADIAN);
     const y: number = props.cy + radius * Math.sin(-props.midAngle * RADIAN);
 
+    if(props.percent.valueOf() != 0)
     return (
       <text
         x={x}
@@ -261,7 +266,10 @@ export default function PetQuizData() {
         </Container>
       </GridItem>
       {viewMode1 && viewMode2 && (
-        <GridItem colSpan={9} height={"100vh"} bg="green.50"></GridItem>
+        <GridItem colSpan={9} height={"100vh"} bg="green.50">
+                   <Text>Sydney: {answer.syd}</Text>
+        </GridItem>
+ 
       )}
       {viewMode1 && !viewMode2 && (
         <GridItem colSpan={9} height={"100vh"} bg="red.50">

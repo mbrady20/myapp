@@ -100,7 +100,12 @@ export default function PetQuiz() {
       authorId: userman,
       initials: input,
     });
-
+    setAnswer({
+      syd: sydTextRef.current,
+      lok: lokTextRef.current,
+      stu: stuTextRef.current,
+      el: elTextRef.current
+    })
     setIsSubmitted(true);
     await router.push("/petQuizData");
   }
@@ -146,19 +151,60 @@ export default function PetQuiz() {
       return 1;
   }
 
+  function sydImageCaptionNumber(){
+    if(isSubmitted)
+      return answer.syd;
+    else
+      return
+        sydTextRef.current;
+  }
 
+  function lokImageCaptionNumber(){
+    if(isSubmitted)
+      return answer.lok;
+    else
+      return
+        lokTextRef.current;
+  }
+
+  function stuImageCaptionNumber(){
+    if(isSubmitted)
+      return answer.stu;
+    else
+      return
+        stuTextRef.current;
+  }
+
+  function elImageCaptionNumber(){
+    if(isSubmitted)
+      return answer.el;
+    else
+      return
+        elTextRef.current;
+  }
   return (
     <Container minWidth={"90vw"}>
+          {!isSubmitted &&
+          <div>
       <Center paddingBottom={"10px"} paddingTop={"20px"}>
+  
         <Text fontSize={"4xl"} as={"b"}>
           Which pet is the cutest?
         </Text>
       </Center>
-     {!isSubmitted && <Center paddingBottom={"15px"}>
+      <Center paddingBottom={"15px"}>
         <Text fontSize={"2xl"} textColor={"gray"}>
           Click on the images below to rank these pets.
         </Text>
-      </Center>}
+      </Center>
+      </div>}
+      {isSubmitted &&
+            <Center paddingBottom={"30px"} paddingTop={"20px"}>
+  
+            <Text fontSize={"4xl"} as={"b"}>
+              Your Ranking!
+            </Text>
+          </Center>}
       <Center>
         <SimpleGrid columns={2} spacing={10}>
           <GridItem rowSpan={1}>
@@ -170,13 +216,13 @@ export default function PetQuiz() {
                 alt="Sydney"
               ></Image>
             </button>
-            <Text>Sydney: {sydTextRef.current}</Text>
+            <Text>Sydney: {sydImageCaptionNumber()}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => lokClick()}>
               <Image src="/loki.jpeg" width={150} height={80} alt="Loki"></Image>
             </button>
-            <Text>Loki: {lokTextRef.current}</Text>
+            <Text>Loki: {lokImageCaptionNumber()}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => stuClick()}>
@@ -187,7 +233,7 @@ export default function PetQuiz() {
                 alt="Stuart"
               ></Image>
             </button>
-            <Text>Stuart: {stuTextRef.current}</Text>
+            <Text>Stuart: {stuImageCaptionNumber()}</Text>
           </GridItem>
           <GridItem>
             <button onClick={() => elClick()}>
@@ -198,7 +244,7 @@ export default function PetQuiz() {
                 alt="El Gato"
               ></Image>
             </button>
-            <Text>El Gato {elTextRef.current}</Text>
+            <Text>El Gato {elImageCaptionNumber()}</Text>
           </GridItem>
           <GridItem colSpan={2}></GridItem>
         </SimpleGrid>
