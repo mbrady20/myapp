@@ -5,4 +5,10 @@ interface Answer {
     el: number
 }
 
-export type {Answer}
+interface PetImage {
+    index: number,
+    value: string,
+    name: string
+}
+
+export type {Answer, PetImage}

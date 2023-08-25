@@ -31,6 +31,7 @@ import {
 } from "chart.js";
 import { AnyObject } from "chart.js/dist/types/basic";
 import router from "next/router";
+import { PetImage } from "npm/interfaces/answer.interface";
 import { answerState } from "npm/states/recoil_state";
 import { api } from "npm/utils/api";
 import { useEffect, useState } from "react";
@@ -53,9 +54,7 @@ import { Props } from "recharts/types/container/Surface";
 import { useRecoilState } from "recoil";
 
 export default function PetQuizData() {
-  const data2 = api.example.getTen.useQuery().data;
-
-  const { data } = api.example.getAll.useQuery();
+ 
 
   const [viewMode1, setViewMode1] = useState(true);
   const [viewMode2, setViewMode2] = useState(true);
@@ -73,9 +72,14 @@ export default function PetQuizData() {
   const [lokPSum, setLokPsum] = useState(0);
   const [stuPSum, setStuPsum] = useState(0);
   const [elPSum, setElPsum] = useState(0);
+ 
+
+  
 
   const [answer, setAnswer] = useRecoilState(answerState);
 
+const   data2 = api.example.getTen.useQuery().data;  
+const { data } = api.example.getAll.useQuery();
   let sydCount = 0;
   let lokCount = 0;
   let stuCount = 0;
@@ -91,7 +95,8 @@ export default function PetQuizData() {
   let lokAvNum = 0;
   let stuAvNum = 0;
   let elAvNum = 0;
-  useEffect(() => {
+  useEffect(() => {     
+
     data?.forEach(
       (element: {
         sydneyRank: number;
@@ -116,6 +121,7 @@ export default function PetQuizData() {
         if (element.elGatoRank.valueOf() == 1) ++elOneCount;
       }
     );
+
     setSydRank(sydCount);
     setLokRank(lokCount);
     setStuRank(stuCount);
@@ -194,7 +200,7 @@ export default function PetQuizData() {
   ]
 
 
-  const averageResultImages = [
+  const averageResultImages= [
     {
         index: sydPSum / totCount,
         value: "/sydney2.png",
@@ -215,7 +221,7 @@ export default function PetQuizData() {
         value: "/elgato.png",
         name: "El Gato"
     }
-  ]
+  ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -250,8 +256,8 @@ export default function PetQuizData() {
   };
 
   function resultsButtonClick() {
-    setViewMode1(true);
-    setViewMode2(true);
+    setViewMode1(false);
+    setViewMode2(false);
   }
 
   function barButtonClick() {
@@ -260,14 +266,13 @@ export default function PetQuizData() {
   }
 
   function pieButtonClick() {
-    console.log(pieChartData);
     setViewMode1(false);
     setViewMode2(true);
   }
 
   function recentButtonClick() {
-    setViewMode1(false);
-    setViewMode2(false);
+    setViewMode1(true);
+    setViewMode2(true);
     
     
   }
@@ -280,6 +285,7 @@ export default function PetQuizData() {
     >
       <GridItem colSpan={1} height={"100vh"} bg="blue.100">
         <Container>
+            
           <Box>
             <Button
               onClick={() => router.push("/")}
@@ -287,6 +293,17 @@ export default function PetQuizData() {
               variant={"twitter"}
             >
               <Icon as={AiFillHome}></Icon>
+            </Button>
+          </Box>
+          <Box paddingY={"50px"}>
+            <Button
+              width={"100%"}
+              bg="purple.100"
+              borderRadius={"50px"}
+              _hover={{ bg: "purple.200" }}
+              onClick={recentButtonClick}
+            >
+              Recent Responses
             </Button>
           </Box>
           <Box paddingY={"50px"}>
@@ -322,20 +339,10 @@ export default function PetQuizData() {
               Pie Chart View
             </Button>
           </Box>
-          <Box paddingY={"50px"}>
-            <Button
-              width={"100%"}
-              bg="purple.100"
-              borderRadius={"50px"}
-              _hover={{ bg: "purple.200" }}
-              onClick={recentButtonClick}
-            >
-              Recent Responses
-            </Button>
-          </Box>
+  
         </Container>
       </GridItem>
-      {viewMode1 && viewMode2 && (
+      {!viewMode1 && !viewMode2 && (
    
         <GridItem colSpan={9} height={"100vh"} bg="green.50">
             <Center>
@@ -362,8 +369,8 @@ export default function PetQuizData() {
               Average Ranking!
             </Text>
             </Center>
-          <SimpleGrid columns={4} paddingLeft={"80px"} paddingTop={"20px"}>
-            {averageResultImages.sort((a, b) => a.index - b.index).map((element) => (
+     {data &&    <SimpleGrid columns={4} paddingLeft={"80px"} paddingTop={"20px"}>
+            {averageResultImages?.sort((a, b) => a.index - b.index).map((element) => (
             <GridItem key = {element.index} height={"100%"} width={"50%"}>
             <Image
               src={element.value}
@@ -375,7 +382,7 @@ export default function PetQuizData() {
             </GridItem>
             
             ))}
-          </SimpleGrid>
+          </SimpleGrid>}
         </GridItem>
       )}
       {viewMode1 && !viewMode2 && (
@@ -441,11 +448,15 @@ export default function PetQuizData() {
         </GridItem>
       )}
 
-      {!viewMode1 && !viewMode2 && (
+      {!!viewMode1 && !!viewMode2 && (
         <GridItem colSpan={9} height={"100vh"} bg="purple.50">
+                     <Center>
+            <Text height={"10vh"} paddingTop={"10px"} as="b" fontSize={"3xl"}>
+              Ten most recent pet quiz results
+            </Text>
+          </Center>
           <TableContainer>
             <Table variant="simple">
-              <TableCaption>Ten most recent Pet Quiz results</TableCaption>
 
               <Thead>
                 <Tr>

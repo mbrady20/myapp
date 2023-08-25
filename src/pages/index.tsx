@@ -60,7 +60,7 @@ export default function Home() {
               </Center>
               <Center paddingTop={"20px"}>
               {user.isSignedIn && !isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizPage")}>Pet Quiz!</Button>}
-              {user.isSignedIn && isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizData")}>View Pet Quiz Results</Button>}
+              {user.isSignedIn && isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizData")}>View Results</Button>}
               {!user.isSignedIn && <SignInButton><Button colorScheme={"telegram"}>Sign in!</Button></SignInButton>}
               {!!user.isSignedIn && <SignOutButton><Button colorScheme={"telegram"}>Sign out?</Button></SignOutButton>}
 
