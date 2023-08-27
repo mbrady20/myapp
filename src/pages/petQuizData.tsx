@@ -54,8 +54,6 @@ import { Props } from "recharts/types/container/Surface";
 import { useRecoilState } from "recoil";
 
 export default function PetQuizData() {
- 
-
   const [viewMode1, setViewMode1] = useState(true);
   const [viewMode2, setViewMode2] = useState(true);
 
@@ -72,14 +70,11 @@ export default function PetQuizData() {
   const [lokPSum, setLokPsum] = useState(0);
   const [stuPSum, setStuPsum] = useState(0);
   const [elPSum, setElPsum] = useState(0);
- 
-
-  
 
   const [answer, setAnswer] = useRecoilState(answerState);
 
-const   data2 = api.example.getTen.useQuery().data;  
-const { data } = api.example.getAll.useQuery();
+  const data2 = api.example.getTen.useQuery().data;
+  const { data } = api.example.getAll.useQuery();
   let sydCount = 0;
   let lokCount = 0;
   let stuCount = 0;
@@ -95,8 +90,7 @@ const { data } = api.example.getAll.useQuery();
   let lokAvNum = 0;
   let stuAvNum = 0;
   let elAvNum = 0;
-  useEffect(() => {     
-
+  useEffect(() => {
     data?.forEach(
       (element: {
         sydneyRank: number;
@@ -178,49 +172,48 @@ const { data } = api.example.getAll.useQuery();
 
   const userResultImages = [
     {
-        index: answer.syd,
-        value: "/sydney2.png",
-        name: "Sydney"
+      index: answer.syd,
+      value: "/sydney2.png",
+      name: "Sydney",
     },
     {
-        index: answer.lok,
-        value: "/loki.jpeg",
-        name: "Loki"
+      index: answer.lok,
+      value: "/loki.jpeg",
+      name: "Loki",
     },
     {
-        index: answer.stu,
-        value: "/stuart.png",
-        name: "Stuart"
+      index: answer.stu,
+      value: "/stuart.png",
+      name: "Stuart",
     },
     {
-        index: answer.el,
-        value: "/elgato.png",
-        name: "El Gato"
-    }
-  ]
+      index: answer.el,
+      value: "/elgato.png",
+      name: "El Gato",
+    },
+  ];
 
-
-  const averageResultImages= [
+  const averageResultImages = [
     {
-        index: sydPSum / totCount,
-        value: "/sydney2.png",
-        name: "Sydney"
+      index: sydPSum / totCount,
+      value: "/sydney2.png",
+      name: "Sydney",
     },
     {
-        index: lokPSum / totCount,
-        value: "/loki.jpeg",
-        name: "Loki"
+      index: lokPSum / totCount,
+      value: "/loki.jpeg",
+      name: "Loki",
     },
     {
-        index: stuPSum / totCount,
-        value: "/stuart.png",
-        name: "Stuart"
+      index: stuPSum / totCount,
+      value: "/stuart.png",
+      name: "Stuart",
     },
     {
-        index: elPSum / totCount,
-        value: "/elgato.png",
-        name: "El Gato"
-    }
+      index: elPSum / totCount,
+      value: "/elgato.png",
+      name: "El Gato",
+    },
   ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -273,8 +266,6 @@ const { data } = api.example.getAll.useQuery();
   function recentButtonClick() {
     setViewMode1(true);
     setViewMode2(true);
-    
-    
   }
 
   return (
@@ -285,7 +276,6 @@ const { data } = api.example.getAll.useQuery();
     >
       <GridItem colSpan={1} height={"100vh"} bg="blue.100">
         <Container>
-            
           <Box>
             <Button
               onClick={() => router.push("/")}
@@ -339,50 +329,56 @@ const { data } = api.example.getAll.useQuery();
               Pie Chart View
             </Button>
           </Box>
-  
         </Container>
       </GridItem>
       {!viewMode1 && !viewMode2 && (
-   
         <GridItem colSpan={9} height={"100vh"} bg="green.50">
-            <Center>
-                        <Text height={"10vh"} paddingTop={"10px"} as="b" fontSize={"3xl"}>
+          <Center>
+            <Text height={"10vh"} paddingTop={"10px"} as="b" fontSize={"3xl"}>
               Your Ranking!
             </Text>
-            </Center>
+          </Center>
           <SimpleGrid columns={4} paddingLeft={"80px"}>
-            {userResultImages.sort((a, b) => a.index - b.index).map((element) => (
-            <GridItem key = {element.index} height={"100%"} width={"50%"}>
-            <Image
-              src={element.value}
-              width={"100%"}
-              height={"100%"}
-              alt="Sydney"
-            ></Image>
-            <Text>{element.name}: {element.index}</Text>
-            </GridItem>
-            
-            ))}
+            {userResultImages
+              .sort((a, b) => a.index - b.index)
+              .map((element) => (
+                <GridItem key={element.index} height={"100%"} width={"50%"}>
+                  <Image
+                    src={element.value}
+                    width={"100%"}
+                    height={"100%"}
+                    alt="Sydney"
+                  ></Image>
+                  <Text>
+                    {element.name}: {element.index}
+                  </Text>
+                </GridItem>
+              ))}
           </SimpleGrid>
-<Center>
-          <Text height={"10vh"} paddingTop={"30px"} as="b" fontSize={"3xl"}>
+          <Center>
+            <Text height={"10vh"} paddingTop={"30px"} as="b" fontSize={"3xl"}>
               Average Ranking!
             </Text>
-            </Center>
-     {data &&    <SimpleGrid columns={4} paddingLeft={"80px"} paddingTop={"20px"}>
-            {averageResultImages?.sort((a, b) => a.index - b.index).map((element) => (
-            <GridItem key = {element.index} height={"100%"} width={"50%"}>
-            <Image
-              src={element.value}
-              width={"100%"}
-              height={"100%"}
-              alt="Sydney"
-            ></Image>
-            <Text>{element.name}: {element.index}</Text>
-            </GridItem>
-            
-            ))}
-          </SimpleGrid>}
+          </Center>
+          {data && (
+            <SimpleGrid columns={4} paddingLeft={"80px"} paddingTop={"20px"}>
+              {averageResultImages
+                ?.sort((a, b) => a.index - b.index)
+                .map((element) => (
+                  <GridItem key={element.index} height={"100%"} width={"50%"}>
+                    <Image
+                      src={element.value}
+                      width={"100%"}
+                      height={"100%"}
+                      alt="Sydney"
+                    ></Image>
+                    <Text>
+                      {element.name}: {Math.round(element.index * 100) / 100}
+                    </Text>
+                  </GridItem>
+                ))}
+            </SimpleGrid>
+          )}
         </GridItem>
       )}
       {viewMode1 && !viewMode2 && (
@@ -450,14 +446,13 @@ const { data } = api.example.getAll.useQuery();
 
       {!!viewMode1 && !!viewMode2 && (
         <GridItem colSpan={9} height={"100vh"} bg="purple.50">
-                     <Center>
+          <Center>
             <Text height={"10vh"} paddingTop={"10px"} as="b" fontSize={"3xl"}>
               Ten most recent pet quiz results
             </Text>
           </Center>
           <TableContainer>
             <Table variant="simple">
-
               <Thead>
                 <Tr>
                   <Th>Initials</Th>

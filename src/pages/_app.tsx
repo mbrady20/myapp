@@ -10,7 +10,7 @@ import { RecoilRoot } from 'recoil';
 const MyApp: AppType = ({Component, pageProps, ...appProps}: AppProps) => {
 
   const getContent = () => {
-    if([`/petQuizData`].includes(appProps.router.pathname))
+    if([`/petQuizData`, `/sign-in`, `/sign-up`].includes(appProps.router.pathname))
       return <Component {...pageProps}/>;
 
       return(

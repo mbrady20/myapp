@@ -24,6 +24,7 @@
     "@trpc/react-query": "^10.34.0",
     "@trpc/server": "^10.34.0",
     "chart.js": "^4.3.3",
+    "formik": "^2.4.3",
     "framer-motion": "^10.16.1",
     "next": "^13.4.19",
     "pdfjs-dist": "^3.9.179",

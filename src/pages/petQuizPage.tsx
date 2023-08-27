@@ -10,6 +10,8 @@ import {
   Container,
   Flex,
   FormControl,
+  FormErrorMessage,
+  FormHelperText,
   FormLabel,
   GridItem,
   Input,
@@ -31,17 +33,18 @@ export default function PetQuiz() {
   const [lokCount, setLokCount] = useState(4);
   const [stuCount, setStuCount] = useState(4);
   const [elCount, setElCount] = useState(4);
- 
+
+  const [validInit, setValidInit] = useState(false);
   const [submitReady, setSubmitReady] = useState(false);
   const [alertText, setAlertText] = useState<string[]>(["", "", ""]);
 
-  const sydText = 4
+  const sydText = 4;
   const sydTextRef = useRef(sydText);
-  const lokText = 4
+  const lokText = 4;
   const lokTextRef = useRef(lokText);
-  const stuText = 4
+  const stuText = 4;
   const stuTextRef = useRef(stuText);
-  const elText = 4
+  const elText = 4;
   const elTextRef = useRef(elText);
 
   const [isSubmitted, setIsSubmitted] = useRecoilState(submittedState);
@@ -53,8 +56,7 @@ export default function PetQuiz() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<HTMLButtonElement>(null);
 
-  const [input, setInput] = useState('');
-
+  const [input, setInput] = useState("");
 
   function submitButton() {
     if (
@@ -80,127 +82,116 @@ export default function PetQuiz() {
     onOpen();
   }
 
-  interface UseUserT {
-    isLoaded: boolean;
-    isSignedIn: boolean;
-    user: { id: string };
-  }
-
-  const { isLoaded, isSignedIn, user } = useUser() as UseUserT;
 
   async function submitPost() {
-    const userman = user.id;
-    console.log(answer)
+    console.log(answer);
     console.log(sydTextRef.current);
     mutation.mutate({
       sydneyRank: sydTextRef.current,
       lokiRank: lokTextRef.current,
       stuartRank: stuTextRef.current,
       elGatoRank: elTextRef.current,
-      authorId: userman,
       initials: input,
     });
     setAnswer({
       syd: sydTextRef.current,
       lok: lokTextRef.current,
       stu: stuTextRef.current,
-      el: elTextRef.current
-    })
+      el: elTextRef.current,
+    });
     setIsSubmitted(true);
     await router.push("/petQuizData");
   }
-  function sydneyClick() {
-    if(!isSubmitted){
-    setSydCount(sydCount + 1);
 
-    sydTextRef.current = (sydCount % 4) + 1;
+  useEffect(() => {
+    validityCheck();
+  }, [input]);
+  function validityCheck() {
+    if (/^[A-Za-z]{2,3}$/.test(input)) setValidInit(true);
+    else setValidInit(false);
+
+    console.log(validInit);
+    console.log(input);
   }
+  function sydneyClick() {
+    if (!isSubmitted) {
+      setSydCount(sydCount + 1);
+
+      sydTextRef.current = (sydCount % 4) + 1;
+    }
   }
 
   function lokClick() {
-    if(!isSubmitted){
-    setLokCount(lokCount + 1);
+    if (!isSubmitted) {
+      setLokCount(lokCount + 1);
 
-    lokTextRef.current = (lokCount % 4) + 1;
-
+      lokTextRef.current = (lokCount % 4) + 1;
+    }
   }
-  }
-
-
 
   function stuClick() {
-    if(!isSubmitted){
-    setStuCount(stuCount + 1);
+    if (!isSubmitted) {
+      setStuCount(stuCount + 1);
 
-   stuTextRef.current = (stuCount % 4) + 1;
-  }
+      stuTextRef.current = (stuCount % 4) + 1;
+    }
   }
 
   function elClick() {
-    if(!isSubmitted){
-    setElCount(elCount + 1);
+    if (!isSubmitted) {
+      setElCount(elCount + 1);
 
-   elTextRef.current = (elCount % 4) + 1;
-  }
-  }
-
-  function columns(){
-    if (submitReady)
-      return 2;
-    else
-      return 1;
+      elTextRef.current = (elCount % 4) + 1;
+    }
   }
 
-  function sydImageCaptionNumber(){
-    if(isSubmitted)
-      return answer.syd;
-    else
-      return sydTextRef.current;
+  function columns() {
+    if (submitReady) return 2;
+    else return 1;
   }
 
-  function lokImageCaptionNumber(){
-    if(isSubmitted)
-      return answer.lok;
-    else
-      return lokTextRef.current;
+  function sydImageCaptionNumber() {
+    if (isSubmitted) return answer.syd;
+    else return sydTextRef.current;
   }
 
-  function stuImageCaptionNumber(){
-    if(isSubmitted)
-      return answer.stu;
-    else
-      return stuTextRef.current;
+  function lokImageCaptionNumber() {
+    if (isSubmitted) return answer.lok;
+    else return lokTextRef.current;
   }
 
-  function elImageCaptionNumber(){
-    if(isSubmitted)
-      return answer.el;
-    else
-      return elTextRef.current;
+  function stuImageCaptionNumber() {
+    if (isSubmitted) return answer.stu;
+    else return stuTextRef.current;
+  }
+
+  function elImageCaptionNumber() {
+    if (isSubmitted) return answer.el;
+    else return elTextRef.current;
   }
   return (
     <Container minWidth={"90vw"}>
-          {!isSubmitted &&
-          <div>
-      <Center paddingBottom={"10px"} paddingTop={"20px"}>
-  
-        <Text fontSize={"4xl"} as={"b"}>
-          Which pet is the cutest?
-        </Text>
-      </Center>
-      <Center paddingBottom={"15px"}>
-        <Text fontSize={"2xl"} textColor={"gray"}>
-          Click on the images below to rank these pets.
-        </Text>
-      </Center>
-      </div>}
-      {isSubmitted &&
-            <Center paddingBottom={"30px"} paddingTop={"20px"}>
-  
+      {!isSubmitted && (
+        <div>
+          <Center paddingBottom={"10px"} paddingTop={"20px"}>
             <Text fontSize={"4xl"} as={"b"}>
-              Your Ranking!
+              Which pet is the cutest?
             </Text>
-          </Center>}
+          </Center>
+          <Center paddingBottom={"15px"}>
+            <Text fontSize={"2xl"} textColor={"gray"}>
+              Click on the images below to rank these pets.
+            </Text>
+          </Center>
+        </div>
+      )}
+      {isSubmitted && (
+        <Center paddingBottom={"30px"} paddingTop={"20px"}>
+          <Text fontSize={"4xl"} as={"b"}>
+            Your Ranking!
+          </Text>
+        </Center>
+      )}
       <Center>
         <SimpleGrid columns={2} spacing={10}>
           <GridItem rowSpan={1}>
@@ -216,7 +207,12 @@ export default function PetQuiz() {
           </GridItem>
           <GridItem>
             <button onClick={() => lokClick()}>
-              <Image src="/loki.jpeg" width={150} height={80} alt="Loki"></Image>
+              <Image
+                src="/loki.jpeg"
+                width={150}
+                height={80}
+                alt="Loki"
+              ></Image>
             </button>
             <Text>Loki: {lokImageCaptionNumber()}</Text>
           </GridItem>
@@ -261,25 +257,38 @@ export default function PetQuiz() {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              <Text>{alertText[0]}</Text>
+              <Text>{alertText[0]}
+             </Text>
             </AlertDialogHeader>
 
             <AlertDialogBody>
               <Text>{alertText[1]}</Text>
-              {!!submitReady && <FormControl>
-                <FormLabel>
-                  Please Enter Your Initials!</FormLabel>
-                  <Input placeholder='JMS' value={input} onChange={(e) => setInput(e.target.value)}>
-                  </Input></FormControl>}
+              {!!submitReady && (
+                <FormControl>
+                  <FormLabel>Please Enter Your Initials!</FormLabel>
+                  <Input
+                    placeholder="JMS"
+                    value={input}
+                    onChange={(e) => {
+                      setInput(e.target.value);
+                    }}
+                    isInvalid={validInit}
+                  ></Input>
+ 
+                </FormControl>
+              )}
             </AlertDialogBody>
-
             <AlertDialogFooter>
               <SimpleGrid columns={columns()} spacing={5}>
                 <Button ref={cancelRef} onClick={onClose}>
                   Change my answer!
                 </Button>
                 {submitReady && (
-                  <Button colorScheme="telegram" onClick={submitPost}>
+                  <Button
+                    colorScheme="telegram"
+                    onClick={submitPost}
+                    isDisabled={!validInit}
+                  >
                     Submit!
                   </Button>
                 )}

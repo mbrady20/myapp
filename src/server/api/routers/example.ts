@@ -1,5 +1,5 @@
 import { Schema, z } from "zod";
-import { createTRPCRouter, publicProcedure } from "npm/server/api/trpc";
+import { createTRPCRouter, privateProcedure, publicProcedure } from "npm/server/api/trpc";
 import { Prisma, Rank } from "@prisma/client";
 import { clerkClient, currentUser } from "@clerk/nextjs";
 
@@ -7,28 +7,28 @@ import { clerkClient, currentUser } from "@clerk/nextjs";
 
 export const exampleRouter = createTRPCRouter({
   
-  getAll: publicProcedure.query( async ({ ctx }) => {
+  getAll: privateProcedure.query( async ({ ctx }) => {
     return await ctx.prisma.rank.findMany();
   }),
 
-  post: publicProcedure
+  post: privateProcedure
   .input(
     z.object({
       sydneyRank: z.number(),
       lokiRank: z.number(),
       stuartRank: z.number(),
       elGatoRank: z.number(),
-      authorId: z.string(),
-      initials: z.string().length(3),
+      initials: z.string(),
     })
   ).mutation (async({input, ctx}) => {
+    const authorId = ctx.userId;
       const post = await ctx.prisma.rank.create({
         data: {
           sydneyRank: input.sydneyRank, 
           lokiRank: input.lokiRank, 
           stuartRank: input.stuartRank, 
           elGatoRank: input.elGatoRank,
-          authorId: input.authorId,
+          authorId: authorId,
           initials: input.initials
         }
       });
@@ -36,7 +36,7 @@ export const exampleRouter = createTRPCRouter({
       return post
   }),
 
-  getTen: publicProcedure.query(async ({ctx}) => {
+  getTen: privateProcedure.query(async ({ctx}) => {
     return await ctx.prisma.rank.findMany({
       take: 10,
       orderBy: {
@@ -46,6 +46,8 @@ export const exampleRouter = createTRPCRouter({
   }),
 
 })
+
+
 
 
 
