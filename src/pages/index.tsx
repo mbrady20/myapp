@@ -80,7 +80,7 @@ export default function Home() {
    
             <Flex alignItems={"center"} paddingTop={"20px"}>
               <Box w="70px">
-                <Button colorScheme="twitter">Send Me an Email</Button>
+                <Button colorScheme="twitter" ><a href="mailto:bradymichael362@gmail.com">Send Me an Email</a></Button>
               </Box>
               <Spacer w="20px"></Spacer>
               <Box>

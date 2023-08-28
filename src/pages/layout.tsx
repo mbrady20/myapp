@@ -183,16 +183,17 @@ export default function RootLayout({
                   }
                 />
               </Box>
-    {/*           <Box p="4">
-                <Tooltip label='bradymichael362@gmail.com' placement="bottom">
+               <Box p="4">
+                  <a href="mailto:bradymichael362@gmail.com">
                 <IconButton
                   aria-label="email"
                   as={AiFillMail}
                   boxSize={8}
                   borderRadius="50px"
-                />
-                </Tooltip>
-              </Box> */}
+                ></IconButton>
+                </a>
+
+              </Box> 
               <Box p="4">
                 <IconButton
                   aria-label="git hub"
