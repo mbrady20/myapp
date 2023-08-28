@@ -31,7 +31,7 @@ import {
 } from "chart.js";
 import { AnyObject } from "chart.js/dist/types/basic";
 import router from "next/router";
-import { PetImage } from "npm/interfaces/answer.interface";
+import { Answer, PetImage } from "npm/interfaces/answer.interface";
 import { answerState } from "npm/states/recoil_state";
 import { api } from "npm/utils/api";
 import { useEffect, useState } from "react";
@@ -71,7 +71,7 @@ export default function PetQuizData() {
   const [stuPSum, setStuPsum] = useState(0);
   const [elPSum, setElPsum] = useState(0);
 
-  const [answer, setAnswer] = useRecoilState(answerState);
+  const [answer, setAnswer] = useRecoilState<Answer>(answerState);
 
   const data2 = api.example.getTen.useQuery().data;
   const { data } = api.example.getAll.useQuery();
