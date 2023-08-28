@@ -19,7 +19,7 @@ const submittedState = atom({
       lok: 4,
       stu: 4,
       el: 4
-    },
+    } as Answer,
     effects_UNSTABLE: [persistAtom]
   })
 
