@@ -62,18 +62,18 @@ export default function RootLayout({
             </Button>
             <Button
               bg="gray.200"
-              borderRadius="0"
+              borderRightRadius="50px"
               onClick={() => router.push("/petQuizPage")}
             >
               Pet Quiz
             </Button>
-            <Button
+  {/*           <Button
               borderRightRadius="50px"
               bg="gray.200"
               onClick={() => router.push("/morePage")}
             >
               More
-            </Button>
+            </Button> */}
           </Center>
         </Container>
 
@@ -147,17 +147,17 @@ export default function RootLayout({
             <Button
               bg="transparent"
               borderRadius="0"
-              onClick={() => router.push("/petQuizData")}
+              onClick={() => router.push("/petQuizPage")}
             >
               Pet Quiz
             </Button>
-            <Button
+{/*             <Button
               borderRadius={"0"}
               bg="transparent"
               onClick={() => router.push("/morePage")}
             >
               More
-            </Button>
+            </Button> */}
           </Center>
 
           <Center>
