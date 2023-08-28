@@ -4,22 +4,22 @@ import { recoilPersist } from "recoil-persist"
 
 const { persistAtom } = recoilPersist();
 
-const submittedState = atom({
+const submittedState = atom<boolean>({
     key: 'submittedState',
-    default: false as Boolean,
+    default: false ,
     effects_UNSTABLE: [persistAtom]
   })
   
   
   
-  const answerState = atom({
+  const answerState = atom<Answer>({
     key: 'answerState',
     default: { 
       syd: 4,
       lok: 4,
       stu: 4,
       el: 4
-    } as Answer,
+    },
     effects_UNSTABLE: [persistAtom]
   })
 
