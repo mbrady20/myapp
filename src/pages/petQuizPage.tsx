@@ -270,7 +270,7 @@ export default function PetQuiz() {
                     placeholder="JMS"
                     value={input}
                     onChange={(e) => {
-                      setInput(e.target.value);
+                      setInput(e.target.value.toLocaleUpperCase);
                     }}
                     isInvalid={validInit}
                   ></Input>

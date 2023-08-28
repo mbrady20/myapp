@@ -1,8 +1,13 @@
 import { atom } from "recoil"
 import { Answer } from "npm/interfaces/answer.interface"
+import { recoilPersist } from "recoil-persist"
+
+const { persistAtom } = recoilPersist();
+
 const submittedState = atom({
     key: 'submittedState',
-    default: false
+    default: false,
+    effects_UNSTABLE: [persistAtom]
   })
   
   
@@ -14,7 +19,8 @@ const submittedState = atom({
       lok: 4,
       stu: 4,
       el: 4
-    }
+    },
+    effects_UNSTABLE: [persistAtom]
   })
 
   export {submittedState, answerState}
