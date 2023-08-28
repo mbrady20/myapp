@@ -21,7 +21,7 @@ export default function Home() {
   const user = useUser();
   const router = useRouter();
 
-  const [isSubmitted, setIsSubmitted] = useRecoilState(submittedState);
+  const [isSubmitted, setIsSubmitted] = useRecoilState<Boolean>(submittedState);
 
   
   return (

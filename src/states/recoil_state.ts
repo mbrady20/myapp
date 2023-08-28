@@ -6,7 +6,7 @@ const { persistAtom } = recoilPersist();
 
 const submittedState = atom({
     key: 'submittedState',
-    default: false,
+    default: false as Boolean,
     effects_UNSTABLE: [persistAtom]
   })
   
