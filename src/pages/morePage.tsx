@@ -2,6 +2,7 @@ import { Center, Container, Grid, GridItem, SimpleGrid } from "@chakra-ui/react"
 import path from "path";
 import { pdfjs, Document } from "react-pdf";
 import type { PDFDocumentProxy } from 'pdfjs-dist';
+import ReactPlayer from "react-player";
 
 export default function MorePage() {
 
@@ -14,7 +15,12 @@ export default function MorePage() {
                     <Document file="/paper.pdf">
                     </Document>
                 </GridItem>
-                <GridItem w='100%' h='500' bg='blue.500' />
+                <GridItem w='100%' h='500' bg='blue.500' >
+       
+                    <ReactPlayer url={'/wrestlingmatch.mov'} controls={true}/>
+      
+                </GridItem>
+                
                 <GridItem w='100%' h='500' bg='blue.500' />
                 </Grid>
             
