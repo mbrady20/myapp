@@ -1,7 +1,6 @@
 import { Schema, z } from "zod";
 import { createTRPCRouter, publicProcedure } from "npm/server/api/trpc";
 import { Prisma, Rank } from "@prisma/client";
-import { clerkClient, currentUser } from "@clerk/nextjs";
 
 
 

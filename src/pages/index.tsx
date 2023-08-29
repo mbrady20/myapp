@@ -10,7 +10,6 @@ import {
   Center,
   Spacer,
 } from "@chakra-ui/react";
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Head from "next/head";
 
 import { useRouter } from "next/router";

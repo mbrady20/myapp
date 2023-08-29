@@ -24,7 +24,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { api } from "npm/utils/api";
-import { currentUser, useUser } from "@clerk/nextjs";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { answerState, submittedState } from "../states/recoil_state";
 
