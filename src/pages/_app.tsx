@@ -20,13 +20,13 @@ const MyApp: AppType = ({Component, pageProps, ...appProps}: AppProps) => {
       );
   }
   return (
-    <ClerkProvider>
+  
       <RecoilRoot>
     <ChakraProvider>
       {getContent()}
     </ChakraProvider>
     </RecoilRoot>
-    </ClerkProvider>
+ 
   )
 }
 

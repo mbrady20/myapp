@@ -18,7 +18,6 @@ import { submittedState } from "npm/states/recoil_state";
 import { useRecoilState } from "recoil";
 
 export default function Home() {
-  const user = useUser();
   const router = useRouter();
 
   const [isSubmitted, setIsSubmitted] = useRecoilState<boolean>(submittedState);
@@ -54,15 +53,12 @@ export default function Home() {
             </Center>
             <Container >
             <Center paddingTop={"25px"}>
-             {!user.isSignedIn && <Text>Sign in to take the Pet Quiz!</Text> }
-             {user.isSignedIn && !isSubmitted && <Text>Take the Pet Quiz! or sign out if you want...</Text>}
-             {user.isSignedIn && isSubmitted && <Text>Sure you don&apos;t want to take another look at your results?</Text>}
+             {!isSubmitted && <Text>Take the Pet Quiz!</Text>}
+             {isSubmitted && <Text>Sure you don&apos;t want to take another look at your results?</Text>}
               </Center>
               <Center paddingTop={"20px"}>
-              {user.isSignedIn && !isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizPage")}>Pet Quiz!</Button>}
-              {user.isSignedIn && isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizData")}>View Results</Button>}
-              {!user.isSignedIn && <SignInButton><Button colorScheme={"telegram"}>Sign in!</Button></SignInButton>}
-              {!!user.isSignedIn && <SignOutButton><Button colorScheme={"telegram"}>Sign out?</Button></SignOutButton>}
+              {!isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizPage")}>Pet Quiz!</Button>}
+              {isSubmitted && <Button colorScheme={"green"} onClick={() => router.push("/petQuizData")}>View Results</Button>}
 
             </Center>
             </Container>

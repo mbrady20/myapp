@@ -1,5 +1,5 @@
 import { Schema, z } from "zod";
-import { createTRPCRouter, privateProcedure, publicProcedure } from "npm/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "npm/server/api/trpc";
 import { Prisma, Rank } from "@prisma/client";
 import { clerkClient, currentUser } from "@clerk/nextjs";
 
@@ -7,11 +7,11 @@ import { clerkClient, currentUser } from "@clerk/nextjs";
 
 export const exampleRouter = createTRPCRouter({
   
-  getAll: privateProcedure.query( async ({ ctx }) => {
+  getAll: publicProcedure.query( async ({ ctx }) => {
     return await ctx.prisma.rank.findMany();
   }),
 
-  post: privateProcedure
+  post: publicProcedure
   .input(
     z.object({
       sydneyRank: z.number(),
@@ -21,14 +21,12 @@ export const exampleRouter = createTRPCRouter({
       initials: z.string(),
     })
   ).mutation (async({input, ctx}) => {
-    const authorId = ctx.userId;
       const post = await ctx.prisma.rank.create({
         data: {
           sydneyRank: input.sydneyRank, 
           lokiRank: input.lokiRank, 
           stuartRank: input.stuartRank, 
           elGatoRank: input.elGatoRank,
-          authorId: authorId,
           initials: input.initials
         }
       });
@@ -36,7 +34,7 @@ export const exampleRouter = createTRPCRouter({
       return post
   }),
 
-  getTen: privateProcedure.query(async ({ctx}) => {
+  getTen: publicProcedure.query(async ({ctx}) => {
     return await ctx.prisma.rank.findMany({
       take: 10,
       orderBy: {

@@ -17,13 +17,10 @@ model Rank {
   id Int @id @default(autoincrement()) 
   createdAt DateTime @default(now())
 
-  authorId String
-
   initials String @db.VarChar(3)
   sydneyRank Int
   lokiRank   Int
   stuartRank Int
   elGatoRank Int
 
-  @@index([authorId])
 }
